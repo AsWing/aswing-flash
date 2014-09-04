@@ -11,15 +11,15 @@ package org.aswing;
  * fire a event to all its ListDataListeners.
  * @author bill
  */
-interface MutableListModel extends ListModel {
+interface MutableListModel extends ListModel{
 
-/**
- * Inserts a element at specified position.
- */
-    function insertElementAt(item:Dynamic, index:Int):Void;
-
-/**
- * Removes a element from a specified position.
- */
-    function removeElementAt (index:Int):Void;
+	/**
+	 * Inserts a element at specified position.
+	 */
+	function insertElementAt(item:Dynamic, index:Int):Void;
+	
+	/**
+	 * Removes a element from a specified position.
+	 */
+	function removeElementAt (index:Int):Void;
 }

@@ -10,10 +10,10 @@ package org.aswing.plaf;
  * @see org.aswing.JMenuItem
  * @author paling
  */
-interface MenuElementUI extends ComponentUI {
-
-/**
- * Subclass override this to process key event.
- */
-    function processKeyEvent(code:Int):Void;
+interface MenuElementUI extends ComponentUI{
+	
+	/**
+	 * Subclass override this to process key event.
+	 */
+	function processKeyEvent(code:Int):Void;
 }

@@ -3,7 +3,7 @@
 */
 
 package org.aswing.event;
-
+ 
 
 import org.aswing.CellEditor;
 
@@ -14,10 +14,10 @@ import org.aswing.CellEditor;
  * @author paling
  */
 interface CellEditorListener {
-
-/** This tells the listeners the editor has ended editing */
+	
+    /** This tells the listeners the editor has ended editing */
     function editingStopped(source:CellEditor):Void;
 
-/** This tells the listeners the editor has canceled editing */
+    /** This tells the listeners the editor has canceled editing */
     function editingCanceled(source:CellEditor):Void;
 }

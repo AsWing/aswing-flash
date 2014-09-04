@@ -10,10 +10,10 @@ import org.aswing.Border;
 import org.aswing.plaf.UIResource;
 import org.aswing.border.EmptyBorder;
 
-class EmptyBorderResource extends EmptyBorder implements UIResource {
-
-    public function new(interior:Border = null, margin:Insets = null) {
-        super(interior, margin);
-    }
-
+class EmptyBorderResource extends EmptyBorder  implements UIResource{
+	
+	public function new(interior:Border=null, margin:Insets=null){
+		super(interior, margin);
+	}
+	
 }

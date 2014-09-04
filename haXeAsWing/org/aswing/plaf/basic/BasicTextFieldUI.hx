@@ -8,15 +8,14 @@ package org.aswing.plaf.basic;
 /**
  * @private
  */
-class BasicTextFieldUI extends BasicTextComponentUI {
-
-    public function new() {
-        super();
-    }
-
-//override this to the sub component's prefix
-
-    override private function getPropertyPrefix():String {
-        return "TextField.";
-    }
+class BasicTextFieldUI extends BasicTextComponentUI{
+	
+	public function new(){
+		super();
+	}
+	
+	//override this to the sub component's prefix
+	override private function getPropertyPrefix():String{
+		return "TextField.";
+	}
 }

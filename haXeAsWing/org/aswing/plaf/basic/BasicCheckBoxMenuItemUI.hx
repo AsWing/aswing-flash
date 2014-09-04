@@ -7,10 +7,10 @@ package org.aswing.plaf.basic;
 
 /**
  * @private
- */
-class BasicCheckBoxMenuItemUI extends BasicMenuItemUI {
-
-    override private function getPropertyPrefix():String {
-        return "CheckBoxMenuItem.";
-    }
+ */	
+class BasicCheckBoxMenuItemUI extends BasicMenuItemUI{
+	
+	override private function getPropertyPrefix():String{
+		return "CheckBoxMenuItem.";
+	}
 }

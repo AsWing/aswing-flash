@@ -470,13 +470,13 @@ import org.aswing.ViewportLayout;
 import org.aswing.WeightBoxLayout;
 import org.aswing.WindowLayout;
 import org.aswing.WindowOrderFocusTraversalPolicy;
-class Main 
+class SwingMain 
 {
 
 	static public function main()
    {
 
-            new Main();
+            new SwingMain();
 
 
    }

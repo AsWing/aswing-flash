@@ -8,9 +8,9 @@ package org.aswing.plaf.basic;
 /**
  * @private
  */
-class BasicRadioButtonMenuItemUI extends BasicMenuItemUI {
+class BasicRadioButtonMenuItemUI extends BasicMenuItemUI{
 
-    override private function getPropertyPrefix():String {
-        return "RadioButtonMenuItem.";
-    }
+	override private function getPropertyPrefix():String{
+		return "RadioButtonMenuItem.";
+	}	
 }

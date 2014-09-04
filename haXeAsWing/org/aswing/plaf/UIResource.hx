@@ -1,6 +1,6 @@
 package org.aswing.plaf;
 
-
+	
 /**
  * This interface is used to mark objects created by ComponentUI delegates.
  * The <code>ComponentUI.installUI()</code> and 
@@ -27,7 +27,8 @@ package org.aswing.plaf;
  * @see EmptyUIResources
  * @see ComponentUI
  * @author paling
- */
-interface UIResource {
-
+ */	
+interface UIResource
+{
+	
 }

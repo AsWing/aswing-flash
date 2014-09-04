@@ -12,10 +12,11 @@ import org.aswing.error.Error;
  * @see org.aswing.AsWingManager
  * @author paling
  */
-class AsWingManagerNotInited extends Error {
-
-    public function new() {
-        super("You have not call AsWingManager.setRoot() yet!");
-    }
-
+class AsWingManagerNotInited extends Error{
+	
+	public function new()
+	{
+		super("You have not call AsWingManager.setRoot() yet!");
+	}
+	
 }

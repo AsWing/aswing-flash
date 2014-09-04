@@ -1,0 +1,11 @@
+{
+  "name": "swing",
+  "url": "",
+  "license": "MIT",
+  "tags": [ "GUI", "UI", "AsWing", "Swing"],
+  "description": "Fork of AsWing (aswing.org)",
+  "version": "0.0.1",
+  "releasenote": "Initial release",
+  "contributors": [ "grebenshikov.n" ],
+  "dependencies": {}
+}

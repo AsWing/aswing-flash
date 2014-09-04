@@ -12,15 +12,15 @@ import org.aswing.JComboBox;
  * @see org.aswing.JComboBox
  * @author paling
  */
-interface ComboBoxUI extends ComponentUI {
+interface ComboBoxUI extends ComponentUI{
 
-/**
- * Set the visiblity of the popup
- */
-    function setPopupVisible(c:JComboBox, v:Bool):Void;
-
-/**
- * Determine the visibility of the popup
- */
-    function isPopupVisible(c:JComboBox):Bool;
+	/**
+     * Set the visiblity of the popup
+     */
+	function setPopupVisible(c:JComboBox, v:Bool):Void;
+	
+	/**
+     * Determine the visibility of the popup
+     */
+	function isPopupVisible(c:JComboBox):Bool;
 }

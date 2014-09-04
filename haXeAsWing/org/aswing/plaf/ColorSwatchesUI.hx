@@ -12,12 +12,12 @@ import org.aswing.Component;
  * 
  * @author paling
  */
-interface ColorSwatchesUI extends ComponentUI {
-
-/**
- * Adds a component to this panel's sections bar.
- * @param com the component to be added
- */
-    function addComponentColorSectionBar(com:Component):Void;
-
+interface ColorSwatchesUI extends ComponentUI{
+	
+	/**
+	 * Adds a component to this panel's sections bar.
+	 * @param com the component to be added
+	 */
+	function addComponentColorSectionBar(com:Component):Void;
+	
 }

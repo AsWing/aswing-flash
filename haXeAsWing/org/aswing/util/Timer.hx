@@ -3,7 +3,7 @@
 */
 package org.aswing.util;
 
-import haxe.Timer;
+import haxe.Timer;	 
 import org.aswing.error.Error;
 import org.aswing.event.AWEvent;
 /**
@@ -38,90 +38,105 @@ import org.aswing.event.AWEvent;
  * <p>
  * @author paling
  */
-class Timer extends AbstractImpulser implements Impulser {
-
-
-    public var currentCount:Int;
-    public var running:Bool;
-
+class Timer extends AbstractImpulser  implements Impulser{
+ 
+	 
+	
+	public var currentCount:Int; 
+	public var running:Bool;
+	 
     private var timer:haxe.Timer;
-
-
-    public function new(delay:Int, ?repeatsNum:Int = 0) {
-        if (Math.isNaN(delay) || delay < 0) {
-            throw new Error ("The delay specified is negative or not a finite number");
-        }
-
-        super(delay, repeatsNum);
-
-        currentCount = 0;
-    }
-
-
-    public function reset() {
-        if (running) {
-            stop();
-        }
-        currentCount = 0;
-    }
-
-
-    override public function start() {
-        if (!running) {
-            running = true;
-            timer = new haxe.Timer (delay);
-            timer.run = fireActionPerformed;
-        }
-    }
-
-    override public function restart():Void {
-
-
-        reset();
-        start();
-    }
-
-    override public function stop() {
-        running = false;
-
-        if (timer != null) {
-            timer.stop();
-            timer = null;
-        }
-    }
-
-
-    override public function setDelay(delay:Int):Void {
-        this.delay = delay;
-        if (running) {
-            stop();
-            start();
-        }
-
-    }
-
-/**
- * Returns the delay between firings of events.
- *
- * @see #setDelay()
- * @see #getInitialDelay()
- */
-
-    override public function getDelay():Int {
-        return delay;
-    }
-
-
-    private function fireActionPerformed():Void {
-        currentCount ++;
-        if (repeatCount > 0 && currentCount >= repeatCount) {
-            stop();
-            dispatchEvent(new AWEvent(AWEvent.ACT));
-            dispatchEvent(new AWEvent(AWEvent.ACT_COMPLETE));
-        }
-        else {
-            dispatchEvent(new AWEvent(AWEvent.ACT));
-        }
-    }
-
+	
+	
+	public function new(delay:Int, repeatCount:Int = 0)
+	{
+		if (Math.isNaN (delay) || delay < 0)
+		{
+			throw new Error ("The delay specified is negative or not a finite number");
+		}
+		
+		super (delay,repeatCount);
+		 
+		currentCount = 0;
+	}
+	
+	
+	public function reset()
+	{
+		if (running)
+		{
+			stop ();
+		}
+		currentCount = 0;
+	}
+	
+	
+	override public function start()
+	{
+		if (!running)
+		{
+			running = true;
+			timer = new haxe.Timer (delay);
+			timer.run = fireActionPerformed;
+		}
+	}
+	
+	override public function restart():Void { 
+	
+		
+		reset();
+		start();
+	}
+	override public function stop()
+	{
+		running = false;
+		
+		if (timer != null)
+		{
+			timer.stop();
+			timer = null;
+		}
+	}
+	
+	
+	
+	override public function setDelay(delay:Int):Void{
+		this.delay = delay;
+		if (running)
+		{
+			stop();
+			start();
+		}
+		
+	}
+	
+    /**
+     * Returns the delay between firings of events.
+     *
+     * @see #setDelay()
+     * @see #getInitialDelay()
+     */	
+	override public function getDelay():Int{
+		return delay;
+	}
+	
+	 
+	
+	
+	
+	private function fireActionPerformed ():Void
+	{
+		currentCount ++; 
+		if (repeatCount > 0 && currentCount >= repeatCount)
+		{
+			stop ();
+			dispatchEvent(new AWEvent(AWEvent.ACT));
+			dispatchEvent(new AWEvent(AWEvent.ACT_COMPLETE));
+		}
+		else
+		{
+			dispatchEvent(new AWEvent(AWEvent.ACT));
+		}
+	}
+	
 } 

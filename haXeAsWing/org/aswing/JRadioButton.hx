@@ -4,9 +4,9 @@
 
 package org.aswing;
 
-import org.aswing.plaf.basic.BasicRadioButtonUI;
-
-
+	import org.aswing.plaf.basic.BasicRadioButtonUI;
+	
+	
 /**
  * An implementation of a radio button -- an item that can be selected or
  * deselected, and which displays its state to the user.
@@ -22,20 +22,21 @@ import org.aswing.plaf.basic.BasicRadioButtonUI;
  * components.
  * </blockquote>
  * @author paling
- */
-class JRadioButton extends JToggleButton {
-
-    public function new(text:String = "", icon:Icon = null) {
-        super(text, icon);
-        setName("JRadioButton");
+ */	
+class JRadioButton extends JToggleButton{
+	
+	public function new(text:String="", icon:Icon=null)
+	{
+		super(text, icon);
+		setName("JRadioButton");
+	}
+	
+    override public function getDefaultBasicUIClass():Class<Dynamic>{
+    	return org.aswing.plaf.basic.BasicRadioButtonUI;
     }
-
-    override public function getDefaultBasicUIClass():Class<Dynamic> {
-        return org.aswing.plaf.basic.BasicRadioButtonUI;
-    }
-
-    override public function getUIClassID():String {
-        return "RadioButtonUI";
-    }
-
+    
+	override public function getUIClassID():String{
+		return "RadioButtonUI";
+	}
+	
 }

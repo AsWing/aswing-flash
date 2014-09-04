@@ -18,20 +18,20 @@ import org.aswing.plaf.basic.BasicRadioButtonMenuItemUI;
  * use a <code>ButtonGroup</code> object.
  * @author paling
  */
-class JRadioButtonMenuItem extends JMenuItem {
+class JRadioButtonMenuItem extends JMenuItem{
+	
+	public function new(text:String="", icon:Icon=null){
+		super(text, icon);
+		setName("JRadioButtonMenuItem");
+    	setModel(new ToggleButtonModel());
+	}
 
-    public function new(text:String = "", icon:Icon = null) {
-        super(text, icon);
-        setName("JRadioButtonMenuItem");
-        setModel(new ToggleButtonModel());
+	override public function getUIClassID():String{
+		return "RadioButtonMenuItemUI";
+	}
+	
+	override public function getDefaultBasicUIClass():Class<Dynamic>{
+    	return org.aswing.plaf.basic.BasicRadioButtonMenuItemUI;
     }
-
-    override public function getUIClassID():String {
-        return "RadioButtonMenuItemUI";
-    }
-
-    override public function getDefaultBasicUIClass():Class<Dynamic> {
-        return org.aswing.plaf.basic.BasicRadioButtonMenuItemUI;
-    }
-
+	
 }

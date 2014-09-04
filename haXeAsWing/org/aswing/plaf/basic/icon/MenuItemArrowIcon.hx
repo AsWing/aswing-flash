@@ -8,5 +8,5 @@ package org.aswing.plaf.basic.icon;
 /**
  * @private
  */
-class MenuItemArrowIcon extends MenuCheckIcon {
+class MenuItemArrowIcon extends MenuCheckIcon{
 }

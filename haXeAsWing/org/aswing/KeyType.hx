@@ -19,18 +19,18 @@ package org.aswing;
  * @see org.aswing.Keyboard
  * @see org.aswing.KeySequence
  * @author paling
- */
-interface KeyType {
-
-/**
- * Returns the key code sequence. Same code sequence be track as same key definition.
- * @return an array(uint[]) that contains the key codes sequence
- */
-    function getCodeSequence():Array<Dynamic>;
-
-/**
- * Returns the string that represent the key sequence.
- * @return string that represent the key sequence.
- */
-    function getDescription():String;
+ */	
+interface KeyType{
+	
+	/**
+	 * Returns the key code sequence. Same code sequence be track as same key definition.
+	 * @return an array(uint[]) that contains the key codes sequence
+	 */
+	function getCodeSequence():Array<Dynamic>;	
+	
+	/**
+	 * Returns the string that represent the key sequence.
+	 * @return string that represent the key sequence. 
+	 */
+	function getDescription():String;
 }

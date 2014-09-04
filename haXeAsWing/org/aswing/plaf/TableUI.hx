@@ -13,10 +13,10 @@ import org.aswing.geom.IntDimension;
  * @see org.aswing.JTable
  * @author paling
  */
-interface TableUI extends ComponentUI {
-
-/**
- * Returns the view size.
- */
-    function getViewSize(table:JTable):IntDimension;
+interface TableUI extends ComponentUI{
+	
+    /**
+     * Returns the view size.
+     */    
+	function getViewSize(table:JTable):IntDimension;
 }

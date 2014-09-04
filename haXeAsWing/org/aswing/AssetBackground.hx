@@ -18,22 +18,22 @@ import flash.display.DisplayObject;
  * </p>
  * @author paling
  */
-class AssetBackground implements GroundDecorator {
-
-    private var asset:DisplayObject;
-
-    public function new(asset:DisplayObject) {
-        this.asset = asset;
-    }
-
-    public function updateDecorator(com:Component, g:Graphics2D, bounds:IntRectangle):Void {
-        asset.x = bounds.x;
-        asset.y = bounds.y;
-        asset.width = bounds.width;
-        asset.height = bounds.height;
-    }
-
-    public function getDisplay(c:Component):DisplayObject {
-        return asset;
-    }
+class AssetBackground implements GroundDecorator{
+	
+	private var asset:DisplayObject;
+	
+	public function new(asset:DisplayObject){
+		this.asset = asset;
+	}
+	
+	public function updateDecorator(com:Component, g:Graphics2D, bounds:IntRectangle):Void{
+		asset.x = bounds.x;
+		asset.y = bounds.y;
+		asset.width = bounds.width;
+		asset.height = bounds.height;		
+	}
+	
+	public function getDisplay(c:Component):DisplayObject{
+		return asset;
+	}
 }

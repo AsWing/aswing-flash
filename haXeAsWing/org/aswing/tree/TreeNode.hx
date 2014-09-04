@@ -3,7 +3,7 @@
 */
 
 package org.aswing.tree;
-
+ 
 
 /**
  * Defines the requirements for an object that can be used as a
@@ -15,43 +15,43 @@ package org.aswing.tree;
  * @see org.aswing.JTree
  */
 interface TreeNode {
-    function getAwmlIndex():Int;
-/**
- * Returns the child <code>TreeNode</code> at index
- * <code>childIndex</code>.
- */
+	function getAwmlIndex():Int;
+    /**
+     * Returns the child <code>TreeNode</code> at index 
+     * <code>childIndex</code>.
+     */
     function getChildAt(childIndex:Int):TreeNode;
 
-/**
- * Returns the number of children <code>TreeNode</code>s the receiver
- * contains.
- */
+    /**
+     * Returns the number of children <code>TreeNode</code>s the receiver
+     * contains.
+     */
     function getChildCount():Int;
 
-/**
- * Returns the parent <code>TreeNode</code> of the receiver.
- */
+    /**
+     * Returns the parent <code>TreeNode</code> of the receiver.
+     */
     function getParent():TreeNode;
 
-/**
- * Returns the index of <code>node</code> in the receivers children.
- * If the receiver does not contain <code>node</code>, -1 will be
- * returned.
- */
+    /**
+     * Returns the index of <code>node</code> in the receivers children.
+     * If the receiver does not contain <code>node</code>, -1 will be
+     * returned.
+     */
     function getIndex(node:TreeNode):Int;
 
-/**
- * Returns true if the receiver allows children.
- */
+    /**
+     * Returns true if the receiver allows children.
+     */
     function getAllowsChildren():Bool;
 
-/**
- * Returns true if the receiver is a leaf.
- */
+    /**
+     * Returns true if the receiver is a leaf.
+     */
     function isLeaf():Bool;
 
-/**
- * Returns the children of the receiver as an <code>Enumeration</code>.
- */
+    /**
+     * Returns the children of the receiver as an <code>Enumeration</code>.
+     */
     function children():Array<Dynamic>;
 }

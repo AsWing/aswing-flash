@@ -10,9 +10,9 @@ package org.aswing;
  * @see org.aswing.JList
  * @author paling
  */
-class DefaultListCellFactory extends DefaultListTextCellFactory {
-
-    public function new(shareCelles:Bool = true, sameHeight:Bool = true) {
-        super(DefaultListCell, shareCelles, sameHeight);
-    }
+class DefaultListCellFactory extends DefaultListTextCellFactory{
+	
+	public function new(shareCelles:Bool=true, sameHeight:Bool=true){
+		super(DefaultListCell, shareCelles, sameHeight);
+	}
 }

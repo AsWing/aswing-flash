@@ -13,15 +13,15 @@ import org.aswing.JTextArea;
  * By default it is wrodwrap and selectable.
  * @author paling
  */
-class MultilineLabel extends JTextArea {
-
-    public function new(text:String = "", rows:Int = 0, columns:Int = 0) {
-        super(text, rows, columns);
-        setWordWrap(true);
-        setBorder(null);
-        setBackgroundDecorator(null);
-        setOpaque(false);
-        setEditable(false);
-    }
-
+class MultilineLabel extends JTextArea{
+	
+	public function new(text:String="", rows:Int=0, columns:Int=0){
+		super(text, rows, columns);
+		setWordWrap(true);
+		setBorder(null);
+		setBackgroundDecorator(null);
+		setOpaque(false);
+		setEditable(false);
+	}
+	
 }

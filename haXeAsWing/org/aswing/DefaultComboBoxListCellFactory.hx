@@ -10,9 +10,9 @@ package org.aswing;
  * @see org.aswing.JComboBox
  * @author paling
  */
-class DefaultComboBoxListCellFactory extends DefaultListTextCellFactory {
-
-    public function new(shareCelles:Bool = true, sameHeight:Bool = true) {
-        super(DefaultComboBoxListCell, shareCelles, sameHeight);
-    }
+class DefaultComboBoxListCellFactory extends DefaultListTextCellFactory{
+	
+	public function new(shareCelles:Bool=true, sameHeight:Bool=true){
+		super(DefaultComboBoxListCell, shareCelles, sameHeight);
+	}
 }

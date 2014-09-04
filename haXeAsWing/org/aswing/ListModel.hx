@@ -13,23 +13,23 @@ import org.aswing.event.ListDataListener;
  * fire a event to all its ListDataListeners.
  * @author paling
  */
-interface ListModel {
-/**
- * Adds a listener to the list that's notified each time a change to the data model occurs.
- */
-    function addListDataListener(l:ListDataListener):Void;
-/**
- * Returns the value at the specified index.
- */
-    function getElementAt(index:Int):Dynamic;
-
-/**
- * Returns the length of the list.
- */
-    function getSize():Int;
-
-/**
- * Removes a listener from the list that's notified each time a change to the data model occurs.
- */
-    function removeListDataListener(l:ListDataListener):Void;
+interface ListModel{
+	/**
+	 * Adds a listener to the list that's notified each time a change to the data model occurs. 
+	 */
+ 	function addListDataListener(l:ListDataListener):Void;
+    /**
+     * Returns the value at the specified index. 
+     */
+ 	function getElementAt(index:Int):Dynamic;
+ 	
+ 	/**
+ 	 * Returns the length of the list.
+ 	 */
+ 	function getSize():Int;
+    
+    /**
+     * Removes a listener from the list that's notified each time a change to the data model occurs. 
+     */
+ 	function removeListDataListener(l:ListDataListener):Void;
 }

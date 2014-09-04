@@ -3,7 +3,7 @@
 */
 
 package org.aswing.tree;
-
+ 
 
 import org.aswing.tree.TreeNode;
 
@@ -16,42 +16,42 @@ import org.aswing.tree.TreeNode;
  * @see org.aswing.tree.DefaultMutableTreeNode
  * @see org.aswing.JTree
  */
-interface MutableTreeNode extends TreeNode {
-
-/**
- * Adds <code>child</code> to the receiver at <code>index</code>.
- * <code>child</code> will be messaged with <code>setParent</code>.
- */
+interface MutableTreeNode extends TreeNode{
+	
+    /**
+     * Adds <code>child</code> to the receiver at <code>index</code>.
+     * <code>child</code> will be messaged with <code>setParent</code>.
+     */
     function insert(child:MutableTreeNode, index:Int):Void;
 
-/**
- * Removes the child at <code>index</code> from the receiver.
- */
+    /**
+     * Removes the child at <code>index</code> from the receiver.
+     */
     function removeAt(index:Int):Void;
 
-/**
- * Removes <code>node</code> from the receiver. <code>setParent</code>
- * will be messaged on <code>node</code>.
- */
+    /**
+     * Removes <code>node</code> from the receiver. <code>setParent</code>
+     * will be messaged on <code>node</code>.
+     */
     function remove(node:MutableTreeNode):Void;
 
-/**
- * Resets the user object of the receiver to <code>object</code>.
- */
+    /**
+     * Resets the user object of the receiver to <code>object</code>.
+     */
     function setUserObject(object:TreeNode):Void;
-
-/**
- * Returns the user object.
- */
-    function getUserObject():TreeNode;
-
-/**
- * Removes the receiver from its parent.
- */
+	
+	/**
+	 * Returns the user object.
+	 */
+	function getUserObject():TreeNode;
+	
+    /**
+     * Removes the receiver from its parent.
+     */
     function removeFromParent():Void;
 
-/**
- * Sets the parent of the receiver to <code>newParent</code>.
- */
+    /**
+     * Sets the parent of the receiver to <code>newParent</code>.
+     */
     function setParent(newParent:MutableTreeNode):Void;
 }

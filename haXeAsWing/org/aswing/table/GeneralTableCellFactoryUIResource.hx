@@ -10,8 +10,8 @@ import org.aswing.plaf.UIResource;
 /**
  * @author paling
  */
-class GeneralTableCellFactoryUIResource extends GeneralTableCellFactory implements UIResource {
-    public function new(cellClass:Class<Dynamic>) {
-        super(cellClass);
-    }
+class GeneralTableCellFactoryUIResource extends GeneralTableCellFactory  implements UIResource{
+	public function new(cellClass:Class<Dynamic>){
+		super(cellClass);
+	}
 }

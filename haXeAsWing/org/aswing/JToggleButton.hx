@@ -4,8 +4,8 @@
 
 package org.aswing;
 
-import org.aswing.plaf.basic.BasicToggleButtonUI;
-
+	import org.aswing.plaf.basic.BasicToggleButtonUI;
+	
 
 /**
  * An implementation of a two-state button.  
@@ -13,25 +13,28 @@ import org.aswing.plaf.basic.BasicToggleButtonUI;
  * are subclasses of this class.
  * @author paling
  */
-class JToggleButton extends AbstractButton {
-    public function new(text:String = "", icon:Icon = null) {
-        super(text, icon);
-        setName("JToggleButton");
-        setModel(new ToggleButtonModel());
-
-//updateUI();
+class JToggleButton extends AbstractButton
+{
+	public function new(text:String="", icon:Icon=null)
+	{
+		super(text, icon);
+		setClipMasked(true);
+		setName("JToggleButton");
+    	setModel(new ToggleButtonModel());
+		
+		//updateUI();
+	}
+	
+    override public function updateUI():Void{
+    	setUI(UIManager.getUI(this));
     }
-
-    override public function updateUI():Void {
-        setUI(UIManager.getUI(this));
+	
+    override public function getDefaultBasicUIClass():Class<Dynamic>{
+    	return org.aswing.plaf.basic.BasicToggleButtonUI;
     }
-
-    override public function getDefaultBasicUIClass():Class<Dynamic> {
-        return org.aswing.plaf.basic.BasicToggleButtonUI;
-    }
-
-    override public function getUIClassID():String {
-        return "ToggleButtonUI";
-    }
-
+	
+	override public function getUIClassID():String{
+		return "ToggleButtonUI";
+	}
+	
 }

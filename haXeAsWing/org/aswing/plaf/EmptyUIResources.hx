@@ -19,39 +19,40 @@ import org.aswing.Icon;
  * </p>
  * @author paling
  */
-class EmptyUIResources {
-/**
- * The default empty value for border.
- */
-    public static var BORDER:Border = DefaultEmptyDecoraterResource.INSTANCE;
-
-/**
- * The default empty value for icon.
- */
-    public static var ICON:Icon = DefaultEmptyDecoraterResource.INSTANCE;
-
-/**
- * The default empty value for ground decorator.
- */
-    public static var DECORATOR:GroundDecorator = DefaultEmptyDecoraterResource.INSTANCE;
-
-/**
- * The default empty value for insets.
- */
-    public static var INSETS:InsetsUIResource = new InsetsUIResource();
-
-/**
- * The default empty value for font.
- */
-    public static var FONT:ASFontUIResource = new ASFontUIResource();
-
-/**
- * The default empty value for color.
- */
-    public static var COLOR:ASColorUIResource = new ASColorUIResource();
-
-/**
- * The default empty value for style tune.
- */
-    public static var STYLE_TUNE:UIStyleTune = new UIStyleTune();
+class EmptyUIResources
+{
+	/**
+	 * The default empty value for border.
+	 */
+	public static var BORDER:Border = DefaultEmptyDecoraterResource.INSTANCE;
+	
+	/**
+	 * The default empty value for icon.
+	 */
+	public static var ICON:Icon = DefaultEmptyDecoraterResource.INSTANCE;
+	
+	/**
+	 * The default empty value for ground decorator.
+	 */
+	public static var DECORATOR:GroundDecorator = DefaultEmptyDecoraterResource.INSTANCE;
+	
+	/**
+	 * The default empty value for insets.
+	 */
+	public static var INSETS:InsetsUIResource = new InsetsUIResource();
+	
+	/**
+	 * The default empty value for font.
+	 */
+	public static var FONT:ASFontUIResource = new ASFontUIResource();
+	
+	/**
+	 * The default empty value for color.
+	 */
+	public static var COLOR:ASColorUIResource = new ASColorUIResource();
+	
+	/**
+	 * The default empty value for style tune.
+	 */
+	public static var STYLE_TUNE:UIStyleTune = new UIStyleTune();
 }

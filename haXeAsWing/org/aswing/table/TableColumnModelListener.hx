@@ -14,23 +14,23 @@ import org.aswing.table.TableColumnModelEvent;
  * 
  * @author paling
  */
-interface TableColumnModelListener {
+interface TableColumnModelListener{
 
-/** Tells listeners that a column was added to the model. */
+    /** Tells listeners that a column was added to the model. */
     function columnAdded(e:TableColumnModelEvent):Void;
 
-/** Tells listeners that a column was removed from the model. */
+    /** Tells listeners that a column was removed from the model. */
     function columnRemoved(e:TableColumnModelEvent):Void;
 
-/** Tells listeners that a column was repositioned. */
+    /** Tells listeners that a column was repositioned. */
     function columnMoved(e:TableColumnModelEvent):Void;
 
-/** Tells listeners that a column was moved due to a margin change. */
+    /** Tells listeners that a column was moved due to a margin change. */
     function columnMarginChanged(source:TableColumnModel):Void;
 
-/**
- * Tells listeners that the selection model of the
- * TableColumnModel changed.
- */
+    /**
+     * Tells listeners that the selection model of the
+     * TableColumnModel changed.
+     */
     function columnSelectionChanged(source:TableColumnModel, firstIndex:Int, lastIndex:Int, programmatic:Bool):Void;
 }

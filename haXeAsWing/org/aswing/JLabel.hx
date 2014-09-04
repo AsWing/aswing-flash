@@ -7,7 +7,7 @@ package org.aswing;
 
 import org.aswing.plaf.basic.BasicLabelUI;
 import flash.display.DisplayObject;
-import flash.filters.BitmapFilter;
+import flash.filters.BitmapFilter;	
 /**
  * A display area for a short text string or an image, 
  * or both.
@@ -41,371 +41,359 @@ import flash.filters.BitmapFilter;
  * </p>
  * @author paling
  */
-class JLabel extends Component {
-
-/**
- * A fast access to AsWingConstants Constant
- * @see org.aswing.AsWingConstants
- */
-    inline public static var CENTER:Int = AsWingConstants.CENTER;
-/**
- * A fast access to AsWingConstants Constant
- * @see org.aswing.AsWingConstants
- */
-    inline public static var TOP:Int = AsWingConstants.TOP;
-/**
- * A fast access to AsWingConstants Constant
- * @see org.aswing.AsWingConstants
- */
-    inline public static var LEFT:Int = AsWingConstants.LEFT;
-/**
- * A fast access to AsWingConstants Constant
- * @see org.aswing.AsWingConstants
- */
-    inline public static var BOTTOM:Int = AsWingConstants.BOTTOM;
-/**
-* A fast access to AsWingConstants Constant
-* @see org.aswing.AsWingConstants
-*/
-    inline public static var RIGHT:Int = AsWingConstants.RIGHT;
-/**
- * A fast access to AsWingConstants Constant
- * @see org.aswing.AsWingConstants
- */
-    inline public static var HORIZONTAL:Int = AsWingConstants.HORIZONTAL;
-/**
- * A fast access to AsWingConstants Constant
- * @see org.aswing.AsWingConstants
- */
-    inline public static var VERTICAL:Int = AsWingConstants.VERTICAL;
-
-
-    private var icon:Icon;
-    private var text:String;
-    private var disabledIcon:Icon;
-
-// Icon/Label Alignment
+class JLabel extends Component{
+	
+	/**
+	 * A fast access to AsWingConstants Constant
+	 * @see org.aswing.AsWingConstants
+	 */
+	inline public static var CENTER:Int= AsWingConstants.CENTER;
+	/**
+	 * A fast access to AsWingConstants Constant
+	 * @see org.aswing.AsWingConstants
+	 */
+	inline public static var TOP:Int= AsWingConstants.TOP;
+	/**
+	 * A fast access to AsWingConstants Constant
+	 * @see org.aswing.AsWingConstants
+	 */
+    inline public static var LEFT:Int= AsWingConstants.LEFT;
+	/**
+	 * A fast access to AsWingConstants Constant
+	 * @see org.aswing.AsWingConstants
+	 */
+    inline public static var BOTTOM:Int= AsWingConstants.BOTTOM;
+ 	/**
+	 * A fast access to AsWingConstants Constant
+	 * @see org.aswing.AsWingConstants
+	 */
+    inline public static var RIGHT:Int= AsWingConstants.RIGHT;
+	/**
+	 * A fast access to AsWingConstants Constant
+	 * @see org.aswing.AsWingConstants
+	 */        
+	inline public static var HORIZONTAL:Int= AsWingConstants.HORIZONTAL;
+	/**
+	 * A fast access to AsWingConstants Constant
+	 * @see org.aswing.AsWingConstants
+	 */
+	inline public static var VERTICAL:Int= AsWingConstants.VERTICAL;
+	
+	
+	private var icon:Icon;
+	private var text:String;
+	private var disabledIcon:Icon;
+	
+	// Icon/Label Alignment
     private var verticalAlignment:Int;
     private var horizontalAlignment:Int;
-
+    
     private var verticalTextPosition:Int;
     private var horizontalTextPosition:Int;
 
     private var iconTextGap:Int;
     private var selectable:Bool;
     private var textFilters:Array<BitmapFilter>;
-
-/**
- * Creates a label.
- * @param text the text
- * @param icon the icon
- * @param horizontalAlignment the horizontal alignment, default is <code>CENTER</code>
- */
-
-    public function new(?text:String = "", ?icon:Icon = null, ?horizontalAlignment:Int = 0) {
-        textFilters = null;
-        super();
-        setName("JLabel");
-//default
-        this.verticalAlignment = CENTER;
-        this.verticalTextPosition = CENTER;
-        this.horizontalTextPosition = RIGHT;
-
-        this.text = text;
-        this.icon = icon;
-        installIcon(icon);
-        this.horizontalAlignment = horizontalAlignment;
-
-        iconTextGap = 4;
-        selectable = false;
-
-        updateUI();
+    
+    /**
+     * Creates a label.
+     * @param text the text
+     * @param icon the icon
+     * @param horizontalAlignment the horizontal alignment, default is <code>CENTER</code>
+     */
+	public function new(?text:String="", ?icon:Icon=null, ?horizontalAlignment:Int=0) {
+		textFilters=null;
+			super();
+			setClipMasked(true);
+		setName("JLabel");
+		//default
+    	this.verticalAlignment = CENTER;
+    	this.verticalTextPosition = CENTER;
+    	this.horizontalTextPosition = RIGHT;
+    	
+    	this.text = text;
+    	this.icon = icon;
+    	installIcon(icon);
+    	this.horizontalAlignment = horizontalAlignment;
+    	
+    	iconTextGap = 4;
+    	selectable = false;
+		
+		updateUI();
+	}
+	
+    override public function updateUI():Void{
+    	setUI(UIManager.getUI(this));
     }
-
-    override public function updateUI():Void {
-        setUI(UIManager.getUI(this));
+	
+    override public function getDefaultBasicUIClass():Class<Dynamic>{
+    	return org.aswing.plaf.basic.BasicLabelUI;
     }
+	
+	override public function getUIClassID():String{
+		return "LabelUI";
+	}
 
-    override public function getDefaultBasicUIClass():Class<Dynamic> {
-        return org.aswing.plaf.basic.BasicLabelUI;
-    }
+	private function installIcon(icon:Icon):Void{
+		if(icon != null && icon.getDisplay(this) != null){
+			addChild(icon.getDisplay(this));
+		}
+	}
+	
+	private function uninstallIcon(icon:Icon):Void{
+		var iconDis:DisplayObject = (icon == null ? null : icon.getDisplay(this));
+		if(iconDis != null && isChild(iconDis)){
+			removeChild(icon.getDisplay(this)); 
+			//org.aswing.table.sorter.SortableTextHeaderCell err;
+		}
+	}
+	
+	public function setText(text:String):Void {
+		
+		if(this.text != text){
+			this.text = text;
+			repaint();
+			invalidate();
+		}
+	}
+	
+	public function getText():String {
 
-    override public function getUIClassID():String {
-        return "LabelUI";
-    }
+		return text;
+	}
+	
+	public function setSelectable(b:Bool):Void{
+		selectable = b;
+	}
+	
+	public function isSelectable():Bool{
+		return selectable;
+	}
+	
+	public function setTextFilters(fs:Array < BitmapFilter > ):Void {	
+		textFilters = fs;
+		repaint();
+	}
+	
+	public function getTextFilters():Array<BitmapFilter>{
+		return textFilters;
+	}
+	
+	public function setIcon(icon:Icon):Void{
+		if(this.icon != icon){
+			uninstallIcon(this.icon);
+			this.icon = icon;
+			installIcon(this.icon);
+			repaint();
+			invalidate();
+		}
+	}
 
-    private function installIcon(icon:Icon):Void {
-        if (icon != null && icon.getDisplay(this) != null) {
-            addChild(icon.getDisplay(this));
-        }
-    }
+	public function getIcon():Icon{
+		return icon;
+	}
 
-    private function uninstallIcon(icon:Icon):Void {
-        var iconDis:DisplayObject = (icon == null ? null : icon.getDisplay(this));
-        if (iconDis != null && isChild(iconDis)) {
-            removeChild(icon.getDisplay(this));
-//org.aswing.table.sorter.SortableTextHeaderCell err;
-        }
-    }
-
-    public function setText(text:String):Void {
-
-        if (this.text != text) {
-            this.text = text;
-            repaint();
-            invalidate();
-        }
-    }
-
-    public function getText():String {
-
-        return text;
-    }
-
-    public function setSelectable(b:Bool):Void {
-        selectable = b;
-    }
-
-    public function isSelectable():Bool {
-        return selectable;
-    }
-
-    public function setTextFilters(fs:Array < BitmapFilter >):Void {
-        textFilters = fs;
-        repaint();
-    }
-
-    public function getTextFilters():Array<BitmapFilter> {
-        return textFilters;
-    }
-
-    public function setIcon(icon:Icon):Void {
-        if (this.icon != icon) {
-            uninstallIcon(this.icon);
-            this.icon = icon;
-            installIcon(this.icon);
-            repaint();
-            invalidate();
-        }
-    }
-
-    public function getIcon():Icon {
-        return icon;
-    }
-
-/**
- * Returns the icon used by the label when it's disabled.
- * If no disabled icon has been set, the button constructs
- * one from the default icon if defalut icon setted. otherwish
- * return null;
- * <p>
- * The disabled icon really should be created
- * (if necessary) by the L&F.-->
- *
- * @return the <code>disabledIcon</code> property
- * @see #setDisabledIcon()
- * @see #getEnabled()
- */
-
+    /**
+     * Returns the icon used by the label when it's disabled.
+     * If no disabled icon has been set, the button constructs
+     * one from the default icon if defalut icon setted. otherwish 
+     * return null; 
+     * <p>
+     * The disabled icon really should be created 
+     * (if necessary) by the L&F.-->
+     *
+     * @return the <code>disabledIcon</code> property
+     * @see #setDisabledIcon()
+     * @see #getEnabled()
+     */
     public function getDisabledIcon():Icon {
-        if (disabledIcon == null) {
-            if (icon != null) {
-//TODO imp
-//disabledIcon = new GrayFilteredIcon(icon);
+        if(disabledIcon == null) {
+            if(icon != null) {
+            	//TODO imp
+                //disabledIcon = new GrayFilteredIcon(icon);
             }
         }
         return disabledIcon;
     }
-
-/**
- * Sets the disabled icon for the label.
- * @param disabledIcon the icon used as the disabled image
- * @see #getDisabledIcon()
- * @see #setEnabled()
- */
-
-    public function setDisabledIcon(disabledIcon:Icon):Void {
+    
+    /**
+     * Sets the disabled icon for the label.
+     * @param disabledIcon the icon used as the disabled image
+     * @see #getDisabledIcon()
+     * @see #setEnabled()
+     */
+    public function setDisabledIcon(disabledIcon:Icon):Void{
         var oldValue:Icon = this.disabledIcon;
         this.disabledIcon = disabledIcon;
         if (disabledIcon != oldValue) {
-            uninstallIcon(oldValue);
-            installIcon(disabledIcon);
+        	uninstallIcon(oldValue);
+        	installIcon(disabledIcon);
             if (!isEnabled()) {
                 repaint();
-                invalidate();
+				invalidate();
             }
         }
     }
 
-/**
- * Returns the vertical alignment of the text and icon.
- *
- * @return the <code>verticalAlignment</code> property, one of the
- *		following values:
- * <ul>
- * <li>AsWingConstants.CENTER (the default)
- * <li>AsWingConstants.TOP
- * <li>AsWingConstants.BOTTOM
- * </ul>
- */
-
-    public function getVerticalAlignment():Float {
+    /**
+     * Returns the vertical alignment of the text and icon.
+     *
+     * @return the <code>verticalAlignment</code> property, one of the
+     *		following values: 
+     * <ul>
+     * <li>AsWingConstants.CENTER (the default)
+     * <li>AsWingConstants.TOP
+     * <li>AsWingConstants.BOTTOM
+     * </ul>
+     */
+    public function getVerticalAlignment():Float{
         return verticalAlignment;
     }
-
-/**
- * Sets the vertical alignment of the icon and text.
- * @param alignment  one of the following values:
- * <ul>
- * <li>AsWingConstants.CENTER (the default)
- * <li>AsWingConstants.TOP
- * <li>AsWingConstants.BOTTOM
- * </ul>
- */
-
-    public function setVerticalAlignment(alignment:Float):Void {
-        if (alignment == verticalAlignment) {
-            return;
-        } else {
-            verticalAlignment = Std.int(alignment);
-            repaint();
+    
+    /**
+     * Sets the vertical alignment of the icon and text.
+     * @param alignment  one of the following values:
+     * <ul>
+     * <li>AsWingConstants.CENTER (the default)
+     * <li>AsWingConstants.TOP
+     * <li>AsWingConstants.BOTTOM
+     * </ul>
+     */
+    public function setVerticalAlignment(alignment:Float):Void{
+        if (alignment == verticalAlignment){
+        	return;
+        }else{
+        	verticalAlignment = Std.int(alignment);
+        	repaint();
         }
     }
-
-/**
- * Returns the horizontal alignment of the icon and text.
- * @return the <code>horizontalAlignment</code> property,
- *		one of the following values:
- * <ul>
- * <li>AsWingConstants.RIGHT (the default)
- * <li>AsWingConstants.LEFT
- * <li>AsWingConstants.CENTER
- * </ul>
- */
-
-    public function getHorizontalAlignment():Float {
+    
+    /**
+     * Returns the horizontal alignment of the icon and text.
+     * @return the <code>horizontalAlignment</code> property,
+     *		one of the following values:
+     * <ul>
+     * <li>AsWingConstants.RIGHT (the default)
+     * <li>AsWingConstants.LEFT
+     * <li>AsWingConstants.CENTER
+     * </ul>
+     */
+    public function getHorizontalAlignment():Float{
         return horizontalAlignment;
     }
-
-/**
- * Sets the horizontal alignment of the icon and text.
- * @param alignment  one of the following values:
- * <ul>
- * <li>AsWingConstants.RIGHT (the default)
- * <li>AsWingConstants.LEFT
- * <li>AsWingConstants.CENTER
- * </ul>
- */
-
-    public function setHorizontalAlignment(alignment:Float):Void {
-        if (alignment == horizontalAlignment) {
-            return;
-        } else {
-            horizontalAlignment = Std.int(alignment);
-            repaint();
+    
+    /**
+     * Sets the horizontal alignment of the icon and text.
+     * @param alignment  one of the following values:
+     * <ul>
+     * <li>AsWingConstants.RIGHT (the default)
+     * <li>AsWingConstants.LEFT
+     * <li>AsWingConstants.CENTER
+     * </ul>
+     */
+    public function setHorizontalAlignment(alignment:Float):Void{
+        if (alignment == horizontalAlignment){
+        	return;
+        }else{
+        	horizontalAlignment =Std.int( alignment);     
+        	repaint();
         }
     }
 
-
-/**
- * Returns the vertical position of the text relative to the icon.
- * @return the <code>verticalTextPosition</code> property,
- *		one of the following values:
- * <ul>
- * <li>AsWingConstants.CENTER  (the default)
- * <li>AsWingConstants.TOP
- * <li>AsWingConstants.BOTTOM
- * </ul>
- */
-
-    public function getVerticalTextPosition():Float {
+    
+    /**
+     * Returns the vertical position of the text relative to the icon.
+     * @return the <code>verticalTextPosition</code> property, 
+     *		one of the following values:
+     * <ul>
+     * <li>AsWingConstants.CENTER  (the default)
+     * <li>AsWingConstants.TOP
+     * <li>AsWingConstants.BOTTOM
+     * </ul>
+     */
+    public function getVerticalTextPosition():Float{
         return verticalTextPosition;
     }
-
-/**
- * Sets the vertical position of the text relative to the icon.
- * @param alignment  one of the following values:
- * <ul>
- * <li>AsWingConstants.CENTER (the default)
- * <li>AsWingConstants.TOP
- * <li>AsWingConstants.BOTTOM
- * </ul>
- */
-
-    public function setVerticalTextPosition(textPosition:Float):Void {
-        if (textPosition == verticalTextPosition) {
-            return;
-        } else {
-            verticalTextPosition = Std.int(textPosition);
-            repaint();
-            revalidate();
+    
+    /**
+     * Sets the vertical position of the text relative to the icon.
+     * @param alignment  one of the following values:
+     * <ul>
+     * <li>AsWingConstants.CENTER (the default)
+     * <li>AsWingConstants.TOP
+     * <li>AsWingConstants.BOTTOM
+     * </ul>
+     */
+    public function setVerticalTextPosition(textPosition:Float):Void{
+        if (textPosition == verticalTextPosition){
+	        return;
+        }else{
+        	verticalTextPosition = Std.int(textPosition);
+        	repaint();
+        	revalidate();
         }
     }
-
-/**
- * Returns the horizontal position of the text relative to the icon.
- * @return the <code>horizontalTextPosition</code> property,
- * 		one of the following values:
- * <ul>
- * <li>AsWingConstants.RIGHT (the default)
- * <li>AsWingConstants.LEFT
- * <li>AsWingConstants.CENTER
- * </ul>
- */
-
-    public function getHorizontalTextPosition():Float {
+    
+    /**
+     * Returns the horizontal position of the text relative to the icon.
+     * @return the <code>horizontalTextPosition</code> property, 
+     * 		one of the following values:
+     * <ul>
+     * <li>AsWingConstants.RIGHT (the default)
+     * <li>AsWingConstants.LEFT
+     * <li>AsWingConstants.CENTER
+     * </ul>
+     */
+    public function getHorizontalTextPosition():Float{
         return horizontalTextPosition;
     }
-
-/**
- * Sets the horizontal position of the text relative to the icon.
- * @param textPosition one of the following values:
- * <ul>
- * <li>AsWingConstants.RIGHT (the default)
- * <li>AsWingConstants.LEFT
- * <li>AsWingConstants.CENTER
- * </ul>
- */
-
-    public function setHorizontalTextPosition(textPosition:Float):Void {
-        if (textPosition == horizontalTextPosition) {
-            return;
-        } else {
-            horizontalTextPosition = Std.int(textPosition);
-            repaint();
-            revalidate();
+    
+    /**
+     * Sets the horizontal position of the text relative to the icon.
+     * @param textPosition one of the following values:
+     * <ul>
+     * <li>AsWingConstants.RIGHT (the default)
+     * <li>AsWingConstants.LEFT
+     * <li>AsWingConstants.CENTER
+     * </ul>
+     */
+    public function setHorizontalTextPosition(textPosition:Float):Void{
+        if (textPosition == horizontalTextPosition){
+        	return;
+        }else{
+        	horizontalTextPosition = Std.int(textPosition);
+        	repaint();
+        	revalidate();
         }
     }
-
-/**
- * Returns the amount of space between the text and the icon
- * displayed in this button.
- *
- * @return an int equal to the number of pixels between the text
- *         and the icon.
- * @see #setIconTextGap()
- */
-
-    public function getIconTextGap():Float {
+    
+    /**
+     * Returns the amount of space between the text and the icon
+     * displayed in this button.
+     *
+     * @return an int equal to the number of pixels between the text
+     *         and the icon.
+     * @see #setIconTextGap()
+     */
+    public function getIconTextGap():Float{
         return iconTextGap;
     }
 
-/**
- * If both the icon and text properties are set, this property
- * defines the space between them.
- * <p>
- * The default value of this property is 4 pixels.
- *
- * @see #getIconTextGap()
- */
-
-    public function setIconTextGap(iconTextGap:Float):Void {
-        var oldValue:Float = this.iconTextGap;
+    /**
+     * If both the icon and text properties are set, this property
+     * defines the space between them.  
+     * <p>
+     * The default value of this property is 4 pixels.
+     * 
+     * @see #getIconTextGap()
+     */
+    public function setIconTextGap(iconTextGap:Float):Void{
+        var oldValue:Float= this.iconTextGap;
         this.iconTextGap = Std.int(iconTextGap);
         if (iconTextGap != oldValue) {
             revalidate();
             repaint();
         }
     }
-
+	
 }

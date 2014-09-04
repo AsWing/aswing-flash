@@ -9,15 +9,15 @@ package org.aswing.event;
  * The base class for model events.
  * @author paling
  */
-class ModelEvent {
-
-    private var source:Dynamic;
-
-    public function new(source:Dynamic) {
-        this.source = source;
-    }
-
-    public function getSource():Dynamic {
-        return source;
-    }
+class ModelEvent{
+	
+	private var source:Dynamic;
+	
+	public function new(source:Dynamic){
+		this.source = source;
+	}
+	
+	public function getSource():Dynamic{
+		return source;
+	}
 }

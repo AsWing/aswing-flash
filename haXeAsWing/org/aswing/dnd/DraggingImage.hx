@@ -12,20 +12,20 @@ import flash.display.DisplayObject;
  * 
  * @author paling
  */
-interface DraggingImage {
+interface DraggingImage{
 
-/**
- * Returns the display object for the representation of dragging.
- */
-    function getDisplay():DisplayObject ;
-
-/**
- * Paints the image for accept state of dragging.(means drop allowed)
- */
-    function switchToAcceptImage():Void;
-
-/**
- * Paints the image for reject state of dragging.(means drop not allowed)
- */
-    function switchToRejectImage():Void;
+	/**
+	 * Returns the display object for the representation of dragging.
+	 */
+	function getDisplay() : DisplayObject ;
+	
+	/**
+	 * Paints the image for accept state of dragging.(means drop allowed)
+	 */
+	function switchToAcceptImage() : Void;
+	
+	/**
+	 * Paints the image for reject state of dragging.(means drop not allowed)
+	 */
+	function switchToRejectImage() : Void;	
 }

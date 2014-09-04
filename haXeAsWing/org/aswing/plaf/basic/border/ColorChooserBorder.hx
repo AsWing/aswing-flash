@@ -5,16 +5,16 @@
 package org.aswing.plaf.basic.border;
 
 import org.aswing.Insets;
-import org.aswing.border.EmptyBorder;
-import org.aswing.plaf.UIResource;
+	import org.aswing.border.EmptyBorder;
+	import org.aswing.plaf.UIResource;
 
 /**
  * @private
  */
-class ColorChooserBorder extends EmptyBorder implements UIResource {
+class ColorChooserBorder extends EmptyBorder  implements UIResource{
 
-    public function new() {
-        super(null, new Insets(6, 6, 6, 6));
-    }
+	public function new(){
+		super(null, new Insets(6, 6, 6, 6));
+	}
 
 }
