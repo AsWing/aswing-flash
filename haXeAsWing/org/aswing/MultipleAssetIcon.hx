@@ -202,7 +202,7 @@ class MultipleAssetIcon implements Icon{
 			// draw mask
 			var maskShape:Shape = AsWingUtils.as(asset.mask,Shape);
 			maskShape.graphics.clear();
-			maskShape.graphics.beginFill(0xFF0000);
+			maskShape.graphics.beginFill(0xffffff);
 			maskShape.graphics.drawRect(0, 0, w, h);
 			maskShape.graphics.endFill();
 			

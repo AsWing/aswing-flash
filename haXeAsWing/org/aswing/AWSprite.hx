@@ -299,16 +299,16 @@ class AWSprite extends Sprite
 			if(clipMasked)	{
 				checkCreateMaskShape();
 				if(maskShape.parent != this){
-					 d_addChild(maskShape);
-					//  mask = maskShape;
+					 //d_addChild(maskShape);
+					mask = maskShape;
 				}
                 setClipMaskRect(clipMaskRect);
 			}else{
 				 
 				 if(maskShape != null && maskShape.parent == this){
-					d_removeChild(maskShape);
+				//	d_removeChild(maskShape);
 				} 
-				//mask = null;
+				mask = null;
 				this.scrollRect=null;
 			}
 		}
@@ -324,10 +324,9 @@ class AWSprite extends Sprite
 			maskShape.width = b.width;
 			*/
 			maskShape.graphics.clear();
-			maskShape.graphics.beginFill(0xff0000);
+			maskShape.graphics.beginFill(0xffffff);
 			maskShape.graphics.drawRect(b.x, b.y, b.width, b.height);
 			maskShape.graphics.endFill();
-		    maskShape.alpha=0;
 		}
 		this.scrollRect=new Rectangle(b.x, b.y, b.width, b.height);
 		clipMaskRect.setRect(b);

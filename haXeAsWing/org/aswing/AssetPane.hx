@@ -150,7 +150,7 @@ class AssetPane extends Container{
 		setFocusable(false);
 		assetContainer = AsWingUtils.createSprite(this, "assetContainer");
 		assetMask = AsWingUtils.createShape(this, "assetMask");
-		assetMask.graphics.beginFill(0xFF0000);
+		assetMask.graphics.beginFill(0xffffff);
 		assetMask.graphics.drawRect(0, 0, 1, 1);
 		assetMask.visible = false;
 		setAsset(asset);

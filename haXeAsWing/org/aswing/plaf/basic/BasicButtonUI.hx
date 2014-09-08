@@ -187,7 +187,7 @@ class BasicButtonUI extends BaseComponentUI{
             b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
             viewRect, iconRect, textRect, 
 	    	b.getDisplayText() == null ? 0 : b.getIconTextGap());
-		
+
     	paintIcon(b, g, iconRect);
     	
         if (text != null && text != ""){

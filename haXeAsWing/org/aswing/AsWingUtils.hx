@@ -380,7 +380,7 @@ class AsWingUtils{
         iconR:IntRectangle,
         textR:IntRectangle,
         textIconGap:Int):String{
-			
+
         if (icon != null) {
             iconR.width = icon.getIconWidth(c);
             iconR.height = icon.getIconHeight(c);
@@ -694,7 +694,7 @@ class AsWingUtils{
     
 	private static var TEXT_FIELD_INTERNAL = null;
     private static function inter_computeStringSize(font:ASFont, str:String):IntDimension {
-        #if(cpp)
+        #if(cpp || js)
         if (null == TEXT_FIELD_INTERNAL) {
             TEXT_FIELD_INTERNAL = new flash.text.TextField();
             TEXT_FIELD_INTERNAL.autoSize = TextFieldAutoSize.LEFT;
