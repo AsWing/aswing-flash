@@ -54,9 +54,6 @@ class TextComponentBackBround implements GroundDecorator implements UIResource{
 			}
 
             var tf = AsWingUtils.as(c, JTextField);
-            if (null != tf) {
-                trace(tf.getText() + " " + cl.toString());
-            }
 
 			r = new IntRectangle(0, 0, Std.int(c.getWidth()-1), Std.int(c.getHeight()-1));
 			var round:Float= tune.round;
