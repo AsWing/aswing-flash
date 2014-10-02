@@ -97,7 +97,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 		var arrowIconRect:IntRectangle = arg[5];
 		var textIconGap:Int = arg[6];
 		var menuItemGap:Int = arg[7];
-		AsWingUtils.layoutCompoundLabel(menuItem, font, text, icon, verticalAlignment, 
+        AsWingUtils.layoutCompoundLabel(menuItem, font, text, icon, verticalAlignment,
 							horizontalAlignment, verticalTextPosition, 
 							horizontalTextPosition, viewRect, iconRect, textRect, 
 							textIconGap);
@@ -157,7 +157,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 			arrowIconRect.y = labelRect.y + Math.floor(labelRect.height/2) - Math.floor(arrowIconRect.height/2);
 			checkIconRect.y = labelRect.y + Math.floor(labelRect.height/2) - Math.floor(checkIconRect.height/2);
 		}
-		  
+
 		return text;
 	}	
 	 
@@ -496,7 +496,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 	 }
 	
 	private function paintCheckIcon(b:JMenuItem, isPaint:Bool, g:Graphics2D, x:Int, y:Int):Void{
-		if(checkIcon!=null) return;
+		if(checkIcon == null) return;
 		
 		if(isPaint!=true){
 			setIconVisible(checkIcon, false);
@@ -507,7 +507,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 	}
 	
 	private function paintArrowIcon(b:JMenuItem, isPaint:Bool, g:Graphics2D, x:Int, y:Int):Void{
-		if(arrowIcon!=null) return;
+		if(arrowIcon == null) return;
 		
 		if(isPaint!=true){
 			setIconVisible(arrowIcon, false);
@@ -650,8 +650,8 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 				  
 		// find the union of the icon and text rects
 		r = textRect.union(iconRect);
-		
-		// To make the accelerator texts appear in a column, find the widest MenuItem text
+
+    	// To make the accelerator texts appear in a column, find the widest MenuItem text
 		// and the widest accelerator text.
 
 		//Get the parent, which stores the information.
@@ -663,16 +663,15 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 			//Get widest text so far from parent, if no one exists null is returned.
 			var maxTextValue:Int= p.getClientProperty(BasicMenuItemUI.MAX_TEXT_WIDTH);
 			var maxAccValue:Int= p.getClientProperty(BasicMenuItemUI.MAX_ACC_WIDTH);
-						
 			//Compare the text widths, and adjust the r.width to the widest.
-			if (r.width < maxTextValue) {
+			if (r.width < maxTextValue && null != maxTextValue) {
 				r.width = maxTextValue;
 			} else {
 				p.putClientProperty(BasicMenuItemUI.MAX_TEXT_WIDTH, r.width);
 			}
 			
 		  //Compare the accelarator widths.
-			if (acceleratorRect.width > maxAccValue) {
+			if (acceleratorRect.width > maxAccValue || null == maxAccValue) {
 				maxAccValue = acceleratorRect.width;
 				p.putClientProperty(BasicMenuItemUI.MAX_ACC_WIDTH, acceleratorRect.width);
 			}
@@ -681,8 +680,8 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 			r.width += maxAccValue;
 			r.width += textIconGap;
 		}
-	
-		if(useCheckAndArrow()) {
+
+        if(useCheckAndArrow()) {
 			// Add in the checkIcon
 			r.width += checkIconRect.width;
 			r.width += textIconGap;
@@ -690,7 +689,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 			// Add in the arrowIcon
 			r.width += textIconGap;
 			r.width += arrowIconRect.width;
-		}	
+		}
 
 		r.width += 2*textIconGap;
 
@@ -699,6 +698,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 			r.width += insets.left + insets.right;
 			r.height += insets.top + insets.bottom;
 		}
+
 		r.width = Math.ceil(r.width);
 		r.height = Math.ceil(r.height);
 		// if the width is even, bump it up one. This is critical
@@ -712,6 +712,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 		if(r.height%2 == 0) {
 			r.height++;
 		}
+
 		return r.getSize();
 	}
 	
@@ -726,7 +727,7 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 	
 	
 	private function useCheckAndArrow():Bool{
-		return !isTopMenu();
+		return !this.isTopMenu();
 	}
 	
 	override public function getPreferredSize(c:Component):IntDimension{

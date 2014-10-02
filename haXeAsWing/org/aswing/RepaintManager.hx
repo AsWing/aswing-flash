@@ -175,11 +175,7 @@ class RepaintManager{
 	private function __render(e:Event=null):Void{
 		if(e!=null)	{
 			var st:Stage = AsWingManager.getStage()	;
-			 
-				 st.removeEventListener(Event.RENDER, __render);
-				
-			 
-			 
+    		 st.removeEventListener(Event.RENDER, __render);
 		}
 		var i:Int;
 		var n:Int;
@@ -200,7 +196,7 @@ class RepaintManager{
 		while((++i) < n){
 			com = processValidates[i];
 			com.validate();
-			//trace("validating com : " + com);
+//			trace("validating com : " + com);
 		}
 //		if(n > 0){
 //			trace(n + " validate time : " + (getTimer() - time));
@@ -217,6 +213,7 @@ class RepaintManager{
 		while((++i) < n){
 			com = processRepaints[i];
 			com.paintImmediately();
+//            trace("painting com : " + com);
 		}
 //		if(n > 0){
 //			trace(n + " paint time : " + (getTimer() - time));
