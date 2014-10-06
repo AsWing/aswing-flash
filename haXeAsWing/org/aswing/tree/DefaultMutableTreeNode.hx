@@ -99,7 +99,7 @@ class DefaultMutableTreeNode implements MutableTreeNode{
      * @see	#isNodeDescendant
      */
     public function insert(newChild:MutableTreeNode, childIndex:Int):Void{
-		if(allowsChildren!=true) {
+		if(allowsChildren == false) {
 			trace("Error : node does not allow children");
 		    throw new Error("node does not allow children");
 		} else if (newChild == null) {

@@ -300,7 +300,7 @@ class AWSprite extends Sprite
 				checkCreateMaskShape();
 				if(maskShape.parent != this){
 					 //d_addChild(maskShape);
-					mask = maskShape;
+					//mask = maskShape;
 				}
                 setClipMaskRect(clipMaskRect);
 			}else{
@@ -308,7 +308,7 @@ class AWSprite extends Sprite
 				 if(maskShape != null && maskShape.parent == this){
 				//	d_removeChild(maskShape);
 				} 
-				mask = null;
+				//mask = null;
 				this.scrollRect=null;
 			}
 		}

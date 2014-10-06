@@ -39,7 +39,7 @@ class GradientBrush implements IBrush{
 	 * @see http://livedocs.macromedia.com/flex/2/langref/flash/display/Graphics.html#beginGradientFill()
 	 * @see http://livedocs.macromedia.com/flex/2/langref/flash/geom/Matrix.html#createGradientBox()
 	 */
-	public function new(fillType:GradientType, colors:Array<Int>, alphas:Array<Dynamic>, ratios:Array<Dynamic>, matrix:Matrix, 
+	public function new(fillType:GradientType, colors:Array<Int>, alphas:Array<Dynamic>, ratios:Array<Dynamic>, matrix:Matrix,
 					?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Float= 0){
 		this.fillType = fillType;
 		this.colors = colors;
@@ -110,7 +110,7 @@ class GradientBrush implements IBrush{
 	 * @inheritDoc 
 	 */
 	public function beginFill(target:Graphics):Void {
-		target.beginGradientFill(fillType, colors, alphas, ratios, matrix, 
+		target.beginGradientFill(fillType, cast(colors), alphas, ratios, matrix,
 			spreadMethod, interpolationMethod, focalPointRatio);
 	}
 	

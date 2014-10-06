@@ -661,17 +661,17 @@ class BasicMenuItemUI extends BaseComponentUI  implements MenuElementUI{
 		if (parent != null &&  !isTopMenu()) {
 			var p:Container = parent;
 			//Get widest text so far from parent, if no one exists null is returned.
-			var maxTextValue:Int= p.getClientProperty(BasicMenuItemUI.MAX_TEXT_WIDTH);
-			var maxAccValue:Int= p.getClientProperty(BasicMenuItemUI.MAX_ACC_WIDTH);
+			var maxTextValue:Null<Int> = p.getClientProperty(BasicMenuItemUI.MAX_TEXT_WIDTH);
+			var maxAccValue:Null<Int> = p.getClientProperty(BasicMenuItemUI.MAX_ACC_WIDTH);
 			//Compare the text widths, and adjust the r.width to the widest.
-			if (r.width < maxTextValue && null != maxTextValue) {
+			if (null != maxTextValue && r.width < maxTextValue) {
 				r.width = maxTextValue;
 			} else {
 				p.putClientProperty(BasicMenuItemUI.MAX_TEXT_WIDTH, r.width);
 			}
 			
 		  //Compare the accelarator widths.
-			if (acceleratorRect.width > maxAccValue || null == maxAccValue) {
+			if (null == maxAccValue || acceleratorRect.width > maxAccValue) {
 				maxAccValue = acceleratorRect.width;
 				p.putClientProperty(BasicMenuItemUI.MAX_ACC_WIDTH, acceleratorRect.width);
 			}

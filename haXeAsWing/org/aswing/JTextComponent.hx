@@ -7,18 +7,18 @@ package org.aswing;
 	
 import flash.display.InteractiveObject;
 import org.aswing.error.Error;
-	#if(flash9)
-	import flash.events.TextEvent;
-	#end
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFieldType;
-	import flash.text.TextFormat;
- 
-	import org.aswing.AWKeyboard;
+#if(flash9)
+import flash.events.TextEvent;
+#end
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
+import flash.text.TextFieldType;
+import flash.text.TextFormat;
+
+import org.aswing.AWKeyboard;
 
 import org.aswing.geom.IntDimension;
-	import org.aswing.geom.IntRectangle;
+import org.aswing.geom.IntRectangle;
 	/**
  * JTextComponent is the base class for text components. 
  * <p>
@@ -250,7 +250,7 @@ class JTextComponent extends Component  implements EditableComponent{
 	private function getTextFieldAutoSizedSize(forceWidth:Int=0, forceHeight:Int=0):IntDimension{
 		var tf:TextField = getTextField();
 		var oldSize:IntDimension = new IntDimension(Std.int(tf.textWidth), Std.int(tf.textHeight));
-		var old:String = tf.autoSize;
+		var old:TextFieldAutoSize = tf.autoSize;
 		if(forceWidth != 0){
 			tf.width = forceWidth;
 		}

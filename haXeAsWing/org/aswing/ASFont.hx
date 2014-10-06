@@ -105,7 +105,7 @@ class ASFont{
 	public function apply(textField:TextField, beginIndex:Int=-1, endIndex:Int=-1):Void{
 		//why
 		advancedProperties.apply(textField);
-		#if(flash9 || mobile || html5)
+		#if(flash9 || cpp || html5)
     		textField.setTextFormat(textFormat, beginIndex, endIndex);
 	    	textField.defaultTextFormat = textFormat;
 	    #end

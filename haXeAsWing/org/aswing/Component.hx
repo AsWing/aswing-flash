@@ -619,31 +619,37 @@ class Component extends AWSprite{
 	 * @param value the visible
 	 */	
 	private function set_d_visible(value:Bool):Bool{
+        #if (cpp)
+		super.visible = value;
+        #else
 		visible = value;
-	
-			return value;
-		}
+        #end
+    	return value;
+	}
 	
 	/**
 	 * Returns the <code>DisplayObject.visible</code> directly.
 	 * @return the <code>DisplayObject.visible</code>
 	 */
 	private function get_d_visible():Bool{
+        #if (cpp)
+		return super.visible;
+        #else
 		return visible;
+        #end
 	}	
 	
-	#if (!mobile)
-	//override public function set_visible(value:Bool):Bool{
-	//	setVisible(value);
+	#if(cpp)
+    override private function set_visible(value:Bool):Bool {
+		setVisible(value);
+			return value;
+		}
 	
-	//		return value;
-	//	}
-	
-	//override public function get_visible():Bool{
-	//	return visible;
-	//}
-	#end
-		
+	override private function get_visible():Bool {
+		return super.visible;
+	}
+    #end
+
 	/**
 	 * Set a component to be hide or shown.
 	 * If a component was hide, some laterly operation may not be done,
@@ -1606,6 +1612,7 @@ class Component extends AWSprite{
 		return super.y;
 	}	
 	
+    #if (!flash)
 	/**
 	 * @see #setX()
 	 */
@@ -1673,6 +1680,7 @@ class Component extends AWSprite{
 	override public function get_height():Float{
 		return getHeight();
 	}
+    #end
 
 	/**
 	 * @param ax
@@ -2775,18 +2783,14 @@ class Component extends AWSprite{
 
 	public var d_x (get, set):Float;
 	public var d_visible (get, set):Bool;
-	/*
-	 
-	public var height (get, set):Float;
 
-	public var width (get, set):Float;
-
-	public var y (get, set):Float;
-
-	public var x (get, set):Float;
-
-
-
-	public var visible (get, set):Bool;
-	 */
+//	public var height (get, set):Float;
+//
+//	public var width (get, set):Float;
+//
+//	public var y (get, set):Float;
+//
+//	public var x (get, set):Float;
+//
+//	public var visible (get, set):Bool;
 }
