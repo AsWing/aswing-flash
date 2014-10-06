@@ -5,4 +5,4 @@ A git copy of the AsWing (Flash and haxe UI library) http://svn.aswing.org/aswin
 
 Install
 -------
-haxelib git swing https://github.com/ngrebenshikov/aswing.git master haXeAsWing/
+haxelib git aswing https://github.com/ngrebenshikov/aswing.git master haXeAsWing/
