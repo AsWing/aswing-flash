@@ -26,7 +26,8 @@ class JTextField extends JTextComponent{
 	
 	private static var defaultMaxChars:Int= 0;
 	
-	private var columns:Int;
+	private var _columns:Int;
+	@bindable public var columns(get, set): Int;
 	
 	public function new(text:String="", columns:Int=0){
 		super(); 
@@ -36,7 +37,7 @@ class JTextField extends JTextComponent{
 		#if (flash9)
 		setMaxChars(defaultMaxChars);
 		#end
-		this.columns = columns;
+		this._columns = columns;
 		//addEventListener(FocusKeyEvent.FOCUS_KEY_DOWN, __onFocusKeyDown);
 		updateUI();
 	}
@@ -77,10 +78,10 @@ class JTextField extends JTextComponent{
 	 * if columns is set to zero or min than zero, the preferred width will be matched just to view all of the text.
 	 * default value is zero if missed this param.
 	 */
-	public function setColumns(columns:Int=0):Void{
+	public inline function setColumns(columns:Int=0):Void{
 		if(columns < 0) columns = 0;
-		if(this.columns != columns){
-			this.columns = columns;
+		if(this._columns != columns){
+			this._columns = columns;
 			revalidate();
 		}
 	}
@@ -88,8 +89,8 @@ class JTextField extends JTextComponent{
 	/**
 	 * @see #setColumns
 	 */
-	public function getColumns():Float{
-		return columns;
+	public inline function getColumns():Float{
+		return _columns;
 	}	
 	
     /**
@@ -114,7 +115,7 @@ class JTextField extends JTextComponent{
 	}   	
 	
 	override private function isAutoSize():Bool{
-		return columns == 0;
+		return _columns == 0;
 	}
 	
 	/**
@@ -122,11 +123,11 @@ class JTextField extends JTextComponent{
 	 */
 	
 	override private function countPreferredSize():IntDimension{
-		if(columns > 0){
+		if(_columns > 0){
 			var columnWidth:Int = getColumnWidth();
 			//why
 			//var width:Int = Std.int( getTextField().textWidth+30);
-			var width:Int = columnWidth * columns + getWidthMargin();
+			var width:Int = columnWidth * _columns + getWidthMargin();
 			 var height:Int = getRowHeight() + getHeightMargin();
 			var size:IntDimension = new IntDimension(width, height);
 			return getInsets().getOutsideSize(size);
@@ -147,4 +148,13 @@ class JTextField extends JTextComponent{
         FocusManager.getManager(stage).setTraversalEnabled(true);
         super.paintFocusRect(true);
     }
+
+	private function get_columns(): Int {
+		return Math.floor(getColumns());
+	}
+
+	private function set_columns(c: Int) {
+		setColumns(c);
+		return c;
+	}
 }

@@ -262,10 +262,6 @@ class MultipleAssetIcon implements Icon{
  
 }
 
-
-
-import flash.display.DisplayObject;
-
 /**
  * AssetItem is a holder for asset properties.
  * 

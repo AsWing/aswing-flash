@@ -52,9 +52,12 @@ class JTextArea extends JTextComponent  implements Viewportable{
  	
 	private static var defaultMaxChars:Int= 0;
  	
-	private var columns:Int;
-	private var rows:Int;
-	
+	private var _columns:Int;
+	private var _rows:Int;
+
+	public var columns(get, set): Int;
+	public var rows(get, set): Int;
+
 	private var viewPos:IntPoint;
 	private var viewportSizeTesting:Bool;
 	private var lastMaxScrollV:Int;
@@ -73,8 +76,8 @@ class JTextArea extends JTextComponent  implements Viewportable{
 			#if (flash9)
 		setMaxChars(defaultMaxChars);
 		#end
-		this.rows = rows;
-		this.columns = columns;
+		this._rows = rows;
+		this._columns = columns;
 		viewPos = new IntPoint();
 		viewportSizeTesting = false;			
 		lastMaxScrollV = getTextField().maxScrollV;
@@ -126,10 +129,10 @@ class JTextArea extends JTextComponent  implements Viewportable{
 	 * @param columns the number of columns to use to calculate the preferred width;
 	 * 			if columns is set to zero or min than zero, the preferred width will be matched just to view all of the text.
 	 */
-	public function setColumns(columns:Int):Void{
+	public inline function setColumns(columns:Int):Void{
 		if(columns < 0) columns = 0;
-		if(this.columns != columns){
-			this.columns = columns;
+		if(this._columns != columns){
+			this._columns = columns;
 			if(isWordWrap()){
 				//invalidateTextFieldAutoSizeToCountPrefferedSize();
 			}
@@ -140,8 +143,8 @@ class JTextArea extends JTextComponent  implements Viewportable{
 	/**
 	 * @see #setColumns
 	 */
-	public function getColumns():Int{
-		return columns;
+	public inline function getColumns():Int{
+		return _columns;
 	}
 	
 	/**
@@ -150,10 +153,10 @@ class JTextArea extends JTextComponent  implements Viewportable{
 	 * @param rows the number of rows to use to calculate the preferred height;
 	 * 			if rows is set to zero or min than zero, the preferred height will be matched just to view all of the text.
 	 */
-	public function setRows(rows:Int):Void{
+	public inline function setRows(rows:Int):Void{
 		if(rows < 0) rows = 0;
-		if(this.rows != rows){
-			this.rows = rows;
+		if(this._rows != rows){
+			this._rows = rows;
 			if(isWordWrap()){
 				//invalidateTextFieldAutoSizeToCountPrefferedSize();
 			}
@@ -164,27 +167,27 @@ class JTextArea extends JTextComponent  implements Viewportable{
 	/**
 	 * @see #setRows
 	 */
-	public function getRows():Int{
-		return rows;
+	public inline function getRows():Int{
+		return _rows;
 	}
 	
 	override private function isAutoSize():Bool{
-		return columns == 0 || rows == 0;
+		return _columns == 0 || _rows == 0;
 	}
 	
 	override private function countPreferredSize():IntDimension{
 		var size:IntDimension;
-		if(columns > 0 && rows > 0){
-			var width:Int= getColumnWidth() * columns + getWidthMargin();
-			var height:Int= getRowHeight() * rows + getHeightMargin();
+		if(_columns > 0 && _rows > 0){
+			var width:Int= getColumnWidth() * _columns + getWidthMargin();
+			var height:Int= getRowHeight() * _rows + getHeightMargin();
 			size = new IntDimension(width, height);
-		}else if(rows <=0 && columns <=0 ){
+		}else if(_rows <=0 && _columns <=0 ){
 			size = getTextFieldAutoSizedSize();
-		}else if(rows > 0){ // columns must <= 0
-			var forceHeight:Int= getRowHeight() * rows + getHeightMargin();
+		}else if(_rows > 0){ // columns must <= 0
+			var forceHeight:Int= getRowHeight() * _rows + getHeightMargin();
 			size = getTextFieldAutoSizedSize(0, forceHeight);
 		}else{ //must be columns > 0 and rows <= 0
-			var forceWidth:Int= getColumnWidth() * columns + getWidthMargin();
+			var forceWidth:Int= getColumnWidth() * _columns + getWidthMargin();
 			size = getTextFieldAutoSizedSize(forceWidth, 0);
 		}
 		return getInsets().getOutsideSize(size);
@@ -481,5 +484,23 @@ class JTextArea extends JTextComponent  implements Viewportable{
 		if(p.x < 0) p.x = 0;
 		if(p.y < 0) p.y = 0;
 		return p;
+	}
+
+	private function get_columns(): Int {
+		return Math.floor(getColumns());
+	}
+
+	private function set_columns(columns: Int) {
+		setColumns(columns);
+		return columns;
+	}
+
+	private function get_rows(): Int {
+		return Math.floor(getRows());
+	}
+
+	private function set_rows(rows: Int) {
+		setRows(rows);
+		return rows;
 	}
 }

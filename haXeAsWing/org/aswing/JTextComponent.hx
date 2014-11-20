@@ -4,7 +4,9 @@
 
 package org.aswing;
 
-	
+
+import flash.events.Event;
+import flash.events.TextEvent;
 import flash.display.InteractiveObject;
 import org.aswing.error.Error;
 #if(flash9)
@@ -49,7 +51,9 @@ class JTextComponent extends Component  implements EditableComponent{
 	private var rowHeight:Int;
 	private var widthMargin:Int;
 	private var heightMargin:Int;
-	private var columnRowCounted:Bool;	
+	private var columnRowCounted:Bool;
+
+	@bindable public var text(get, set): String;
 	
 	public function new(){
 		super();
@@ -60,7 +64,8 @@ class JTextComponent extends Component  implements EditableComponent{
 		textField.background = false;
 		editable = true;
 		columnRowCounted = false;
-		addChild(textField); 
+		addChild(textField);
+		textField.addEventListener(Event.CHANGE, function(e) { bindx.Bind.notify(this.text);});
 		#if(flash9)
 		textField.addEventListener(TextEvent.TEXT_INPUT, __onTextComponentTextInput);
 		#end
@@ -165,6 +170,7 @@ class JTextComponent extends Component  implements EditableComponent{
 			if(isAutoSize()){
 				revalidate();
 			}
+			bindx.Bind.notify(this.text);
 		}
 	}
 	
@@ -495,5 +501,12 @@ class JTextComponent extends Component  implements EditableComponent{
 	}
 		#end
 		
-		
+	private function get_text(): String {
+		return getText();
+	}
+
+	private function set_text(val: String): String {
+		setText(val);
+		return val;
+	}
 }

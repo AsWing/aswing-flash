@@ -5,8 +5,8 @@
 
 package org.aswing;
 
-	
 
+import bindx.IBindable;
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.display.InteractiveObject;
@@ -170,7 +170,7 @@ import org.aswing.dnd.SourceData;
  * 
  * @author paling
  */	
-class Component extends AWSprite{
+class Component extends AWSprite implements IBindable {
 	/**
 	 * The max interval time to judge whether click was continuously.
 	 */

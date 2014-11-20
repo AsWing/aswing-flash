@@ -81,7 +81,8 @@ class JLabel extends Component{
 	
 	
 	private var icon:Icon;
-	private var text:String;
+	private var _text:String;
+	public var text(get, set): String;
 	private var disabledIcon:Icon;
 	
 	// Icon/Label Alignment
@@ -150,8 +151,8 @@ class JLabel extends Component{
 	
 	public function setText(text:String):Void {
 		
-		if(this.text != text){
-			this.text = text;
+		if(this._text != text){
+			this._text = text;
 			repaint();
 			invalidate();
 		}
@@ -159,7 +160,7 @@ class JLabel extends Component{
 	
 	public function getText():String {
 
-		return text;
+		return _text;
 	}
 	
 	public function setSelectable(b:Bool):Void{
@@ -395,5 +396,16 @@ class JLabel extends Component{
             repaint();
         }
     }
+
+	/* Bindable  getters/setters */
+
+	private function get_text(): String {
+		return getText();
+	}
+
+	private function set_text(text: String): String {
+		setText(text);
+		return text;
+	}
 	
 }
