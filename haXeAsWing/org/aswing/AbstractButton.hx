@@ -96,7 +96,11 @@ class AbstractButton extends Component{
     /** The data model that determines the button's state. */
     private var model:ButtonModel;
     
-    private var text:String;
+    private var _text:String;
+	public var text(get, set): String;
+	private function get_text(): String { return getText(); }
+	private function set_text(s: String): String { setText(s); return s; }
+
 	private var displayText:String;
 	private var mnemonic:Int;
 	private var mnemonicIndex:Int;
@@ -149,7 +153,7 @@ class AbstractButton extends Component{
     	
     	iconTextGap = 2;
     	mnemonicEnabled = true;
-    	this.text = text;
+    	this._text = text;
     	this.analyzeMnemonic();
     	this.defaultIcon = icon;
     	//setText(text);
@@ -442,8 +446,8 @@ class AbstractButton extends Component{
 	 * @see #getMnemonicIndex()
 	 */
 	public function setText(text:String):Void{
-		if(this.text != text){
-			this.text = text;
+		if(this._text != text){
+			this._text = text;
 			analyzeMnemonic();
 			repaint();
 			invalidate();
@@ -468,21 +472,21 @@ class AbstractButton extends Component{
 	}
 	
 	private function analyzeMnemonic():Void{
-		displayText = text;
+		displayText = _text;
 		mnemonic = -1;
 		mnemonicIndex = -1;
-		if(text == null){
+		if(_text == null){
 			return;
 		}
 		if(mnemonicEnabled!=true){
 			return;
 		}
-		var mi:Int= text.indexOf("&");
+		var mi:Int= _text.indexOf("&");
 		var mc:String= "";
 		var found:Bool= false;
 		while(mi >= 0){
-			if(mi+1 < text.length){
-				mc = text.charAt(mi+1);
+			if(mi+1 < _text.length){
+				mc = _text.charAt(mi+1);
 				if (StringUtils.isLetter(mc)) {
 				
 					found = true;
@@ -491,10 +495,10 @@ class AbstractButton extends Component{
 			}else{
 				break;
 			}
-			mi = text.indexOf("&", mi+1);
+			mi = _text.indexOf("&", mi+1);
 		}
 		if(found)	{
-			displayText = text.substr(0, mi) + text.substr(mi+1);
+			displayText = _text.substr(0, mi) + _text.substr(mi+1);
 			mnemonic = mc.toUpperCase().charCodeAt(0);
 			mnemonicIndex = mi;
 		}
@@ -506,7 +510,7 @@ class AbstractButton extends Component{
 	 * @see #getDisplayText()
 	 */
 	public function getText():String{
-		return text;
+		return _text;
 	}
 	
 	/**

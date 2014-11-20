@@ -33,7 +33,7 @@ class Form extends JPanel  implements LayoutManager{
 	
 	public function new(){
 		super();
-		layout = this;
+		_layout = this;
 		hGap = vGap = 2;
 	}
 	

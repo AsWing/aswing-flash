@@ -77,7 +77,7 @@ class JWindow extends JPopup{
 		activable = true;
 		addChild(focusObject);
 		
-		layout = new WindowLayout();
+		_layout = new WindowLayout();
 		setFocusTraversalPolicy(new WindowOrderFocusTraversalPolicy());
 		
 		addEventListener(MouseEvent.MOUSE_DOWN, __activeWhenPress, true);
@@ -90,7 +90,7 @@ class JWindow extends JPopup{
 	 */
 	override public function setLayout(layout:LayoutManager):Void{
 		if(Std.is(layout,WindowLayout)){
-			var oldLayout:WindowLayout = AsWingUtils.as(this.layout,WindowLayout)	;
+			var oldLayout:WindowLayout = AsWingUtils.as(this._layout,WindowLayout)	;
 			super.setLayout(layout);
 			if(oldLayout != null){
 				if(oldLayout.getTitleBar() != null){

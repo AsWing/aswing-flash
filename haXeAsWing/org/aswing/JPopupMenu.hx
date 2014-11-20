@@ -49,7 +49,7 @@ class JPopupMenu extends Container  implements MenuElement{
 		setName("JPopupMenu");
 		menuInUse = false;
 		
-		layout = new EmptyLayoutUIResourse();
+		_layout = new EmptyLayoutUIResourse();
 		setSelectionModel(new DefaultSingleSelectionModel());
 		//setFocusTraversalKeysEnabled(false);
 		

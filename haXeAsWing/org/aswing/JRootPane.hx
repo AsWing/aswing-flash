@@ -39,7 +39,7 @@ class JRootPane extends Container{
 		super();
 		setName("JRootPane");
 		mnemonicJustActed = false;
-		layout = new BorderLayout();
+		_layout = new BorderLayout();
 		mnemonics = new haxe.ds.IntMap<AbstractButton>();
 		keyManager = new KeyboardManager();
 		keyManager.init(this);

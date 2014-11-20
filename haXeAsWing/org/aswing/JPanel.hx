@@ -17,7 +17,7 @@ class JPanel extends Container{
 		super();
 		setName("JPanel");
 		if(layout == null) layout = new FlowLayout();
-		this.layout = layout;
+		this._layout = layout;
 		updateUI();
 	}
 	

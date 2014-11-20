@@ -38,10 +38,13 @@ class AswingAdapter extends MergedAdapter<XMLData, Node, Type> {
 }
 
 class ComponentAdapter extends DisplayObjectAdapter {
-    public function new() {
-        super(macro: org.aswing.Component, null, CustomLevel(ClassLevel, 20));
+    public function new(?baseType:ComplexType, ?events:Map<String, MetaData>, ?matchLevel:MatchLevel) {
+		if (baseType == null) baseType = macro : org.aswing.Component;
+		if (matchLevel == null) matchLevel = CustomLevel(ClassLevel, 20);
+		super(baseType, events, matchLevel);
     }
-    	override public function getNodeWriters():Array<IHaxeNodeWriter<Node>> {
+
+    override public function getNodeWriters():Array<IHaxeNodeWriter<Node>> {
 		return [new ComponentWithMetaWriter(baseType, metaWriter, matchLevel)];
 	}
 }
@@ -53,7 +56,7 @@ class ComponentWithMetaWriter extends BaseNodeWithMetaWriter {
 			if (n.cData != null && n.cData.indexOf('{Binding') >= 0) {
 				nodesToRemove.push(n);
 
-				var mode = 'twoway'; //once, oneway, twoway
+				var mode = 'oneway'; //once, oneway, twoway
 
                 var trimmed = n.cData.replace('{Binding','').replace('}','').trim();
 				var sourcePropertyName = trimmed;
@@ -111,17 +114,23 @@ class ComponentWithMetaWriter extends BaseNodeWithMetaWriter {
 	}
 }
 
-class ContainerAdapter extends DisplayObjectAdapter {
-    public function new() {
-        super(macro: org.aswing.Container, null, CustomLevel(ClassLevel, 30));
+class ContainerAdapter extends ComponentAdapter {
+    public function new(?baseType:ComplexType, ?events:Map<String, MetaData>, ?matchLevel:MatchLevel) {
+		if (baseType == null) baseType = macro : org.aswing.Container;
+		if (matchLevel == null) matchLevel = CustomLevel(ClassLevel, 30);
+		super(baseType, events, matchLevel);
+
     }
-    	override public function getNodeWriters():Array<IHaxeNodeWriter<Node>> {
+    override public function getNodeWriters():Array<IHaxeNodeWriter<Node>> {
 		return [new ContainerWithMetaWriter(baseType, metaWriter, matchLevel)];
 	}
 }
 
-class ContainerWithMetaWriter extends BaseNodeWithMetaWriter {
+class ContainerWithMetaWriter extends ComponentWithMetaWriter {
 	override function child(node:Node, scope:String, child:Node, method:Array<String>, assign = false):Void {
+		var t = child.superType;
+		if (t.indexOf("JPopup") >= 0 || t.indexOf("JWindow") >= 0 || t.indexOf("JFrame") >= 0) return;
+
 		method.push('$scope.append(${universalGet(child)});');
 	}
 }

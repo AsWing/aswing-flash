@@ -63,24 +63,28 @@ class Container extends Component{
 	
 	private var focusTraversalPolicy:FocusTraversalPolicy;
 	private var children: Array<Dynamic>;
-	private var layout:LayoutManager;
-		
+	private var _layout:LayoutManager;
+
+	public var layout(get, set): LayoutManager;
+	private function get_layout():LayoutManager { return getLayout(); }
+	private function set_layout(l:LayoutManager):LayoutManager { setLayout(l); return l; }
+
 	public function new()
 	{
 		super();
 		setName("Container");
 		focusTraversalPolicy = null;
 		children = new Array();
-		layout = new EmptyLayout();
+		_layout = new EmptyLayout();
 	}
-	
+
 	public function setLayout(layout:LayoutManager):Void{
-		this.layout = layout;
+		this._layout = layout;
 		revalidate();
 	}
 	
 	public function getLayout():LayoutManager{
-		return layout;
+		return _layout;
 	}
 	
 	/**
@@ -130,7 +134,7 @@ class Container extends Component{
      * @see org.aswing.LayoutManager
      */
     override public function invalidate():Void{
-    	layout.invalidateLayout(this);
+    	_layout.invalidateLayout(this);
     	super.invalidate();
     }
 	
@@ -162,7 +166,7 @@ class Container extends Component{
 	 */
 	public function doLayout():Void{
 		if(isVisible()){
-			layout.layoutContainer(this);
+			_layout.layoutContainer(this);
 		}
 	}
 	
@@ -268,7 +272,7 @@ class Container extends Component{
 			addChildAt(com, getChildIndexWithComponentIndex(i));
 			children.insert(i, com);
 		}
-		layout.addLayoutComponent(com, (constraints == null) ? com.getConstraints() : constraints);
+		_layout.addLayoutComponent(com, (constraints == null) ? com.getConstraints() : constraints);
 		dispatchEvent(new ContainerEvent(ContainerEvent.COM_ADDED, this, com));
 		
 		if (valid) {
@@ -351,7 +355,7 @@ class Container extends Component{
 			children.splice(i, 1);
 			super.removeChild(com);
 			com.container = null;
-			layout.removeLayoutComponent(com);
+			_layout.removeLayoutComponent(com);
 			dispatchEvent(new ContainerEvent(ContainerEvent.COM_REMOVED, this, com));
 			
 			if (valid) {
@@ -475,7 +479,7 @@ class Container extends Component{
 			size = ui.getMinimumSize(this);
 		}
 		if(size == null){
-			size = layout.minimumLayoutSize(this);
+			size = _layout.minimumLayoutSize(this);
 		}
 		if(size == null){//this should never happen
 			size = super.countMinimumSize();
@@ -492,7 +496,7 @@ class Container extends Component{
 			size = ui.getMaximumSize(this);
 		}
 		if(size == null){
-			size = layout.maximumLayoutSize(this);
+			size = _layout.maximumLayoutSize(this);
 		}
 		if(size == null){//this should never happen
 			size = super.countMaximumSize();
@@ -509,7 +513,7 @@ class Container extends Component{
 			size = ui.getPreferredSize(this);
 		}
 		if(size == null){
-			size = layout.preferredLayoutSize(this);
+			size = _layout.preferredLayoutSize(this);
 		}
 		if(size == null){//this should never happen
 			size = super.countPreferredSize();

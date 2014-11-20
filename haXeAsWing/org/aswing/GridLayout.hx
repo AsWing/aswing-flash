@@ -15,6 +15,7 @@ import org.aswing.geom.IntRectangle;
 /**
  * @author feynixs(Cai Rong)
  * @author paling
+ * @author ngrebenshikov
  */
 class GridLayout extends EmptyLayout{
 	/**
@@ -25,7 +26,11 @@ class GridLayout extends EmptyLayout{
      * @see #getHgap()
      * @see #setHgap(hgap:int)
      */
-    private var hgap:Int;
+	public var hgap(get, set): Int;
+    private var _hgap:Int;
+	private function get_hgap(): Int { return getHgap(); }
+	private function set_hgap(v: Int): Int { setHgap(v); return v; }
+
     /**
      * This is the vertical gap (in pixels) which specifies the space
      * between rows.  They can be changed at any time.
@@ -34,7 +39,10 @@ class GridLayout extends EmptyLayout{
      * @see #getVgap()
      * @see #setVgap(vgap:int)
      */
-    private var vgap:Int;
+	public var vgap(get, set): Int;
+    private var _vgap:Int;
+	private function get_vgap(): Int { return getVgap(); }
+	private function set_vgap(v: Int): Int { setVgap(v); return v; }
     /**
      * This is the number of rows specified for the grid.  The number
      * of rows can be changed at any time.
@@ -45,7 +53,10 @@ class GridLayout extends EmptyLayout{
      * @see #getRows()
      * @see #setRows(rows:int)
      */
-    private var rows:Int;
+	public var rows(get, set): Int;
+    private var _rows:Int;
+	private function get_rows(): Int { return getRows(); }
+	private function set_rows(v: Int): Int { setRows(v); return v; }
     /**
      * This is the number of columns specified for the grid.  The number
      * of columns can be changed at any time.
@@ -56,9 +67,10 @@ class GridLayout extends EmptyLayout{
      * @see #getColumns()
      * @see #setColumns(cols:int)
      */
-    private var cols:Int;
-
-
+	public var columns(get, set): Int;
+    private var _cols:Int;
+	private function get_columns(): Int { return getColumns(); }
+	private function set_columns(v: Int): Int { setColumns(v); return v; }
 
     /**
      * <p> 
@@ -94,10 +106,10 @@ class GridLayout extends EmptyLayout{
 	     	throw new  Error("rows and cols cannot both be zero");
 	 	}
 	    
-		this.rows = rows;
-		this.cols = cols;
-		this.hgap = hgap;
-		this.vgap = vgap;
+		this._rows = rows;
+		this._cols = cols;
+		this._hgap = hgap;
+		this._vgap = vgap;
 		super();
     }
 
@@ -107,7 +119,7 @@ class GridLayout extends EmptyLayout{
      * 
      */
     public function getRows():Int{
-		return rows;
+		return _rows;
     }
 
     /**
@@ -115,7 +127,7 @@ class GridLayout extends EmptyLayout{
      * @param        rows   the number of rows in this layout
      */
     public function setRows(rows:Int):Void{
-		this.rows = rows;
+		this._rows = rows;
     }
 
     /**
@@ -124,7 +136,7 @@ class GridLayout extends EmptyLayout{
      * 
      */
     public function getColumns():Int{
-		return cols;
+		return _cols;
     }
 
     /**
@@ -138,7 +150,7 @@ class GridLayout extends EmptyLayout{
      * 
      */
     public function setColumns(cols:Int):Void{
-		this.cols = cols;
+		this._cols = cols;
     }
 
     /**
@@ -147,7 +159,7 @@ class GridLayout extends EmptyLayout{
      * 
      */
     public function getHgap():Int{
-		return hgap;
+		return _hgap;
     }
     
     /**
@@ -156,7 +168,7 @@ class GridLayout extends EmptyLayout{
      *
      */
     public function setHgap(hgap:Int):Void{
-		this.hgap = hgap;
+		this._hgap = hgap;
     }
     
     /**
@@ -165,7 +177,7 @@ class GridLayout extends EmptyLayout{
      * 
      */
     public function getVgap():Int{
-		return vgap;
+		return _vgap;
     }
     
     /**
@@ -174,14 +186,14 @@ class GridLayout extends EmptyLayout{
      * 
      */
     public function setVgap(vgap:Int):Void{
-		this.vgap = vgap;
+		this._vgap = vgap;
     }
 	
     override public function preferredLayoutSize(target:Container):IntDimension{
 		var insets:Insets = target.getInsets();
 		var ncomponents:Int= target.getComponentCount();
-		var nrows:Int= rows;
-		var ncols:Int= cols;
+		var nrows:Int= _rows;
+		var ncols:Int= _cols;
 		if (nrows > 0){
 			ncols = Math.floor(((ncomponents + nrows) - 1) / nrows);
 		}else{
@@ -199,7 +211,7 @@ class GridLayout extends EmptyLayout{
 				h = d.height;
 			}
 		}
-		return new IntDimension((((insets.left + insets.right) + (ncols * w)) + ((ncols - 1) * hgap)), (((insets.top + insets.bottom) + (nrows * h)) + ((nrows - 1) * vgap))); 	
+		return new IntDimension((((insets.left + insets.right) + (ncols * w)) + ((ncols - 1) * _hgap)), (((insets.top + insets.bottom) + (nrows * h)) + ((nrows - 1) * _vgap)));
     }
 
     override public function minimumLayoutSize(target:Container):IntDimension{
@@ -216,8 +228,8 @@ class GridLayout extends EmptyLayout{
     override public function layoutContainer(target:Container):Void{
 		var insets:Insets = target.getInsets();
 		var ncomponents:Int= target.getComponentCount();
-		var nrows:Int= rows;
-		var ncols:Int= cols;
+		var nrows:Int= _rows;
+		var ncols:Int= _cols;
 		if (ncomponents == 0){
 			return ;
 		}
@@ -229,8 +241,8 @@ class GridLayout extends EmptyLayout{
 		var w:Int= (target.getWidth() - (insets.left + insets.right));
 		var h:Int= (target.getHeight() - (insets.top + insets.bottom));
 
-		w = Math.floor((w - ((ncols - 1) * hgap)) / ncols);
-		h = Math.floor((h - ((nrows - 1) * vgap)) / nrows);
+		w = Math.floor((w - ((ncols - 1) * _hgap)) / ncols);
+		h = Math.floor((h - ((nrows - 1) * _vgap)) / nrows);
 		var x:Int= insets.left;
 		var y:Int= insets.top;
 		for (c in 0...ncols){
@@ -240,13 +252,13 @@ class GridLayout extends EmptyLayout{
 				if (i < ncomponents){
 					target.getComponent(i).setBounds(new IntRectangle(x, y, w, h));
 				}
-				y += (h + vgap);
+				y += (h + _vgap);
 			}
-			x += (w + hgap);
+			x += (w + _hgap);
 		}
 	}
 	public function toString():String{
-		return ((((((((("GridLayout[hgap=") + hgap) + ",vgap=") + vgap) + ",rows=") + rows) + ",cols=") + cols) + "]");
+		return ((((((((("GridLayout[hgap=") + _hgap) + ",vgap=") + _vgap) + ",rows=") + _rows) + ",cols=") + _cols) + "]");
 	}
     
 	/**
@@ -262,4 +274,5 @@ class GridLayout extends EmptyLayout{
     override public function getLayoutAlignmentY(target:Container):Float{
     	return 0.5;
     }
+
 }

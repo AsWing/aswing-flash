@@ -28,7 +28,7 @@ class JMenuBar extends Container  implements MenuElement{
 	public function new() {
 		super();
 		setSelectionModel(new DefaultSingleSelectionModel());
-		layout = new EmptyLayoutUIResourse();
+		_layout = new EmptyLayoutUIResourse();
 		menuInUse = false;
 		
 		addEventListener(Event.REMOVED_FROM_STAGE, __menuBarDestroied);

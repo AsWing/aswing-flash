@@ -241,7 +241,7 @@ class JList extends Container  implements LayoutManager implements Viewportable 
 			super();
 		
 		setName("JList");
-		layout = this;
+		_layout = this;
 		cellPane = new CellPane();
 		append(cellPane);
 		viewPosition = new IntPoint(0, 0);

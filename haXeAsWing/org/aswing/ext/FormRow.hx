@@ -83,7 +83,7 @@ class FormRow extends JPanel  implements LayoutManager{
      */
 	public function new(?columnChildren: Array<Dynamic>){
 		super();
-		layout = this;
+		_layout = this;
 		verticalAlignment = AsWingConstants.CENTER;
 		columns = new ArrayList();
 		columns.appendAll(columnChildren);
