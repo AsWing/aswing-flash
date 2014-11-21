@@ -1224,7 +1224,11 @@ class Component extends AWSprite implements IBindable {
 	public function setSizeWH(w:Int, h:Int):Void{
 		setSize(new IntDimension(w, h));
 	}
-	
+
+	public var currentSize(get,set): IntDimension;
+	private function get_currentSize(): IntDimension { return getSize(); }
+	private function set_currentSize(v: IntDimension): IntDimension { setSize(v); return v; }
+
 	/**
 	 * Stores the size value of this component into "return value" rv and returns rv. 
 	 * If rv is null a new IntDimension object is allocated. 
