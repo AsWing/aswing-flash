@@ -89,20 +89,28 @@ class ComponentWithMetaWriter extends BaseNodeWithMetaWriter {
 					method.push('var bindSourceListener = function() { bindx.Bind.bindx($valueSource, sourcePropertyListener); }');
 					method.push('if (null != dataContext) { bindSourceListener(); }');
 					method.push('bindx.Bind.bindx(this.dataContext, function(old,_) {
-						if (null != old) { bindx.Bind.unbindx(old.$sourcePropertyName, sourcePropertyListener);}
-						$propertyName = $valueSource;
-						bindSourceListener(); });');
+							if (null != old) { bindx.Bind.unbindx(old.$sourcePropertyName, sourcePropertyListener);}
+							if (null != this.dataContext) {
+								$propertyName = $valueSource;
+								bindSourceListener();
+							}
+						});
+					');
 
 					if (mode == "twoway") {
 						method.push('var propertyListener = function(_,_) {
-							if (!programmaticalyChange) {
+							if (!programmaticalyChange && null != this.dataContext) {
 								programmaticalyChange = true;
 								$valueSource = $propertyName;
 								programmaticalyChange = false;
 							}
 						};');
 						method.push('bindx.Bind.bindx($propertyName, propertyListener);');
-						method.push('bindx.Bind.bindx(this.dataContext, function(old,_) { $valueSource = $propertyName; });');
+						method.push('bindx.Bind.bindx(this.dataContext, function(old,_) {
+						 	if (null != this.dataContext) {
+								$valueSource = $propertyName;
+							}
+						});');
 					}
 				}
 			}
