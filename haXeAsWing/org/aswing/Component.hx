@@ -214,7 +214,12 @@ class Component extends AWSprite implements IBindable {
 	private var fontValidated:Bool;
 	private var opaque:Bool;
 	private var opaqueSet:Bool;
-	private var border:Border;
+
+	private var _border:Border;
+	public var border(get, set): Border;
+	private function get_border(): Border { return getBorder(); }
+	private function set_border(v: Border): Border { setBorder(v); return v; }
+
 	private var enabled:Bool;
 	private var focusable:Bool;
 	private var focusableSet:Bool;
@@ -248,7 +253,7 @@ class Component extends AWSprite implements IBindable {
 		readyToPaint = false;
 		toolTipText = null;
 		uiElement = false;
-		border = DefaultEmptyDecoraterResource.INSTANCE;
+		_border = DefaultEmptyDecoraterResource.INSTANCE;
 		backgroundDecorator = DefaultEmptyDecoraterResource.INSTANCE;
 		foregroundDecorator = DefaultEmptyDecoraterResource.INSTANCE;
 		
@@ -497,14 +502,14 @@ class Component extends AWSprite implements IBindable {
 	 * @param border the new border to set, or null.
 	 */
 	public function setBorder(b:Border):Void { 
-		if(b != border){
-			if(border != null && border.getDisplay(this) != null){
-				removeChild(border.getDisplay(this));
+		if(b != _border){
+			if(_border != null && _border.getDisplay(this) != null){
+				removeChild(_border.getDisplay(this));
 			}
-			border = b;
+			_border = b;
 			
-			if(border != null && border.getDisplay(this) != null){
-				addChildAt(border.getDisplay(this), getLowestIndexAboveBackground());
+			if(_border != null && _border.getDisplay(this) != null){
+				addChildAt(_border.getDisplay(this), getLowestIndexAboveBackground());
 			}
 			
 			repaint();
@@ -517,7 +522,7 @@ class Component extends AWSprite implements IBindable {
 	 * @return the border.
 	 */
 	public function getBorder():Border{
-		return border;
+		return _border;
 	}
 	
 	/**
@@ -525,10 +530,10 @@ class Component extends AWSprite implements IBindable {
 	 * otherwise returns an empty insets.
 	 */
 	public function getInsets():Insets{
-		if(border == null){
+		if(_border == null){
 			return new Insets();
 		}else{
-			return border.getBorderInsets(this, getSize().getBounds());
+			return _border.getBorderInsets(this, getSize().getBounds());
 		}
 	}
 	
@@ -2264,10 +2269,10 @@ class Component extends AWSprite implements IBindable {
 		}
 		//paintFocusRect();
 		//paint border at last to make it at the top depth
-		if(border != null){
+		if(_border != null){
 			// not that border is not painted in b, is painted in component's full size bounds
 			// because border are the rounds, others will painted in the border's bounds.
-			border.updateBorder(this, g, getInsets().getOutsideBounds(b.clone()));
+			_border.updateBorder(this, g, getInsets().getOutsideBounds(b.clone()));
 		}
 		if(foregroundDecorator != null){
 			foregroundDecorator.updateDecorator(this, g, b.clone());

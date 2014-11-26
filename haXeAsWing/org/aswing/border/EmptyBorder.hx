@@ -28,7 +28,23 @@ class EmptyBorder extends DecorateBorder{
 			this.margin = margin.clone();
 		}
 	}
-	
+
+	public var top(get,set): Int;
+	private function get_top(): Int { return getTop(); }
+	private function set_top(v: Int): Int { setTop(v); return v; }
+
+	public var left(get,set): Int;
+	private function get_left(): Int { return getLeft(); }
+	private function set_left(v: Int): Int { setLeft(v); return v; }
+
+	public var bottom(get,set): Int;
+	private function get_bottom(): Int { return getBottom(); }
+	private function set_bottom(v: Int): Int { setBottom(v); return v; }
+
+	public var right(get,set): Int;
+	private function get_right(): Int { return getRight(); }
+	private function set_right(v: Int): Int { setRight(v); return v; }
+
 	public function setTop(v:Int):Void{
 		margin.top = v;
 	}
