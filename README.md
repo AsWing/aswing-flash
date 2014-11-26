@@ -1,7 +1,7 @@
 aswing
 ======
 
-A git copy of the AsWing (Flash and haxe UI library) http://svn.aswing.org/aswing
+A fork of the AsWing (Flash and Haxe UI library) http://svn.aswing.org/aswing
 
 Install
 -------
