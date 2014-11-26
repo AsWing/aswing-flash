@@ -203,16 +203,33 @@ class Component extends AWSprite implements IBindable {
 	private var bounds:IntRectangle;
 	private var readyToPaint:Bool;
 	
-	private var background:ASColor;
-	private var foreground:ASColor;
-	private var mideground:ASColor;
+	private var _background:ASColor;
+	public var background(get,set): ASColor;
+	private function get_background(): ASColor { return getBackground(); }
+	private function set_background(v: ASColor): ASColor { setBackground(v); return v; }
+
+	private var _foreground:ASColor;
+	public var foreground(get,set): ASColor;
+	private function get_foreground(): ASColor { return getForeground(); }
+	private function set_foreground(v: ASColor): ASColor { setForeground(v); return v; }
+
+	private var _mideground:ASColor;
+	public var mideground(get,set): ASColor;
+	private function get_mideground(): ASColor { return getMideground(); }
+	private function set_mideground(v: ASColor): ASColor { setMideground(v); return v; }
+
 	private var styleTune:StyleTune;
 	private var styleProxy:Component;
 	private var backgroundDecorator:GroundDecorator;
 	private var foregroundDecorator:GroundDecorator;
 	private var font:ASFont;
 	private var fontValidated:Bool;
-	private var opaque:Bool;
+
+	private var _opaque:Bool;
+	public var opaque(get,set): Bool;
+	private function get_opaque(): Bool { return isOpaque(); }
+	private function set_opaque(v: Bool): Bool { setOpaque(v); return v; }
+
 	private var opaqueSet:Bool;
 
 	private var _border:Border;
@@ -242,7 +259,7 @@ class Component extends AWSprite implements IBindable {
 		clientProperty = null;
 		alignmentX = 0;
 		alignmentY = 0;
-		opaque = false;
+		_opaque = false;
 		opaqueSet = false;
 		valid = false;
 		enabled = true;
@@ -258,9 +275,9 @@ class Component extends AWSprite implements IBindable {
 		foregroundDecorator = DefaultEmptyDecoraterResource.INSTANCE;
 		
 		font = DefaultEmptyDecoraterResource.DEFAULT_FONT;
-		background = DefaultEmptyDecoraterResource.DEFAULT_BACKGROUND_COLOR;
-		foreground = DefaultEmptyDecoraterResource.DEFAULT_FOREGROUND_COLOR;
-		mideground = DefaultEmptyDecoraterResource.DEFAULT_MIDEGROUND_COLOR;
+		_background = DefaultEmptyDecoraterResource.DEFAULT_BACKGROUND_COLOR;
+		_foreground = DefaultEmptyDecoraterResource.DEFAULT_FOREGROUND_COLOR;
+		_mideground = DefaultEmptyDecoraterResource.DEFAULT_MIDEGROUND_COLOR;
 		styleTune  = DefaultEmptyDecoraterResource.DEFAULT_STYLE_TUNE;
 		
 		addEventListener(FocusEvent.FOCUS_IN, __focusIn);
@@ -781,8 +798,8 @@ class Component extends AWSprite implements IBindable {
      * @see #getBackground()
 	 */
 	public function setBackground(c:ASColor):Void{
-		if(background != c){
-			background = c;
+		if(_background != c){
+			_background = c;
 			repaint();
 		}
 	}
@@ -795,8 +812,8 @@ class Component extends AWSprite implements IBindable {
      * @see #setBackground()
 	 */
 	public function getBackground():ASColor{
-		if(background != null && background != DefaultEmptyDecoraterResource.NULL_COLOR){
-			return background;
+		if(_background != null && _background != DefaultEmptyDecoraterResource.NULL_COLOR){
+			return _background;
 		}else if(getStyleProxy() != null){
         	return getStyleProxy().getBackground();
         }else{
@@ -816,8 +833,8 @@ class Component extends AWSprite implements IBindable {
      * @see #getForeground()
 	 */
 	public function setForeground(c:ASColor):Void{
-		if(foreground != c){
-			foreground = c;
+		if(_foreground != c){
+			_foreground = c;
 			repaint();
 		}
 	}
@@ -830,8 +847,8 @@ class Component extends AWSprite implements IBindable {
      * @see #setForeground()
 	 */
 	public function getForeground():ASColor{
-		if(foreground != null && foreground != DefaultEmptyDecoraterResource.NULL_COLOR){
-			return foreground;
+		if(_foreground != null && _foreground != DefaultEmptyDecoraterResource.NULL_COLOR){
+			return _foreground;
 		}else if(getStyleProxy() != null){
         	return getStyleProxy().getForeground();
         }else{
@@ -852,8 +869,8 @@ class Component extends AWSprite implements IBindable {
      * @see #getMideground()
 	 */
 	public function setMideground(c:ASColor):Void{
-		if(mideground != c){
-			mideground = c;
+		if(_mideground != c){
+			_mideground = c;
 			repaint();
 		}
 	}
@@ -866,8 +883,8 @@ class Component extends AWSprite implements IBindable {
      * @see #setMideground()
 	 */
 	public function getMideground():ASColor{
-		if(mideground != null && mideground != DefaultEmptyDecoraterResource.NULL_COLOR){
-			return mideground;
+		if(_mideground != null && _mideground != DefaultEmptyDecoraterResource.NULL_COLOR){
+			return _mideground;
 		}else if(getStyleProxy() != null){
         	return getStyleProxy().getMideground();
         }else{
@@ -967,8 +984,8 @@ class Component extends AWSprite implements IBindable {
      */
     public function setOpaque(b:Bool):Void{
     	setOpaqueSet(true);
-    	if(opaque != b){
-    		opaque = b;
+    	if(_opaque != b){
+    		_opaque = b;
     		repaint();
     	}
     }
@@ -994,7 +1011,7 @@ class Component extends AWSprite implements IBindable {
      * @see #isOpaqueSet()
      */
     public function isOpaque():Bool{
-    	return opaque;
+    	return _opaque;
     }
     
     /**

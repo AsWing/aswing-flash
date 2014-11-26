@@ -44,20 +44,28 @@ class ASColor{
 	public static var HALO_BLUE:ASColor = new ASColor(0x2BF5F5);
 	
 	
-	private var rgb:Int;
-	private var alpha:Float;
+	private var _rgb:Int;
+	private var _alpha:Float;
 	
 	private var hue:Float;
 	private var luminance:Float;
 	private var saturation:Float;
 	private var hlsCounted:Bool;
-	
+
+	public var rgb(get,set):Int;
+	private function get_rgb(): Int { return _rgb; }
+	private function set_rgb(v: Int): Int { _rgb = v; hlsCounted = false; return v; }
+
+	public var alpha(get,set):Float;
+	private function get_alpha(): Float { return _alpha; }
+	private function set_alpha(v: Float): Float { _alpha = v; return v; }
+
 	/**
 	 * Create a ASColor
 	 */
 	public function new(rgb:Int=0x000000, ?alpha:Float=1){
-		this.rgb = rgb;
-		this.alpha = Math.min(1, Math.max(0, alpha));
+		this._rgb = rgb;
+		this._alpha = Math.min(1, Math.max(0, alpha));
 		hlsCounted = false;
 	}
 	
@@ -65,22 +73,22 @@ class ASColor{
 	 * Returns the alpha component in the range 0-1.
 	 */
 	public function getAlpha():Float{
-		return alpha;	
+		return _alpha;
 	}
 	
 	/**
 	 * Returns the RGB value representing the color.
 	 */
 	public function getRGB():Int{
-		return rgb;	
+		return _rgb;
 	}
 	
 	/**
 	 * Returns the ARGB value representing the color.
 	 */	
 	public function getARGB():Int{
-		var a:Int= Std.int(alpha*255);
-		return rgb | (a << 24);
+		var a:Int= Std.int(_alpha*255);
+		return _rgb | (a << 24);
 	}
 	
 	/**
@@ -88,7 +96,7 @@ class ASColor{
      * @return the red component.
      */
 	public function getRed():Int{
-		return (rgb & 0x00FF0000) >> 16;
+		return (_rgb & 0x00FF0000) >> 16;
 	}
 	
 	/**
@@ -96,7 +104,7 @@ class ASColor{
      * @return the green component.
      */	
 	public function getGreen():Int{
-		return (rgb & 0x0000FF00) >> 8;
+		return (_rgb & 0x0000FF00) >> 8;
 	}
 	
 	/**
@@ -104,7 +112,7 @@ class ASColor{
      * @return the blue component.
      */	
 	public function getBlue():Int{
-		return (rgb & 0x000000FF);
+		return (_rgb & 0x000000FF);
 	}
 	
 	/**
@@ -238,7 +246,7 @@ class ASColor{
 		var h:Float= getHue() * hScale;
 		var l:Float= getLuminance() * lScale;
 		var s:Float= getSaturation() * sScale;
-		return getASColorWithHLS(h, l, s, alpha);
+		return getASColorWithHLS(h, l, s, _alpha);
 	}
 	
 	/**
@@ -254,7 +262,7 @@ class ASColor{
 		if(h < 0) h += 1;
 		var l:Float= getLuminance() + lOffset;
 		var s:Float= getSaturation() + sOffset;
-		return getASColorWithHLS(h, l, s, alpha);
+		return getASColorWithHLS(h, l, s, _alpha);
 	}	
 	
     /**
@@ -269,7 +277,7 @@ class ASColor{
         var r:Int= getRed();
         var g:Int= getGreen();
         var b:Int= getBlue();
-		return getASColor(Std.int(r*factor),Std.int( g*factor), Std.int(b*factor), alpha);
+		return getASColor(Std.int(r*factor),Std.int( g*factor), Std.int(b*factor), _alpha);
 	}
 	
     /**
@@ -292,13 +300,13 @@ class ASColor{
          */
         var i:Float= Math.floor(1.0/(1.0-factor));
         if ( r == 0 && g == 0 && b == 0) {
-           return getASColor(Std.int(i), Std.int(i), Std.int(i), alpha);
+           return getASColor(Std.int(i), Std.int(i), Std.int(i), _alpha);
         }
         if ( r > 0 && r < i ) r = i;
         if ( g > 0 && g < i ) g = i;
         if ( b > 0 && b < i ) b = i;
         
-        return getASColor(Std.int(r/factor), Std.int(g/factor), Std.int(b/factor), alpha);
+        return getASColor(Std.int(r/factor), Std.int(g/factor), Std.int(b/factor), _alpha);
 	}
 	
 	/**
@@ -366,7 +374,7 @@ class ASColor{
 		b *= 255;
 		var color_n:Float= (Std.int(r)<<16) + (Std.int(g)<<8) +b;
 		var color_rgb:Int= Std.int(Math.max(0, Math.min(0xFFFFFF, Math.round(color_n))));
-		c.rgb = color_rgb;
+		c._rgb = color_rgb;
 		return c;
 	}
 	
@@ -403,7 +411,7 @@ class ASColor{
 	}
 	
 	public function toString():String{
-		return "ASColor(rgb:"+StringTools.hex(rgb)+", alpha:"+alpha+")";
+		return "ASColor(rgb:"+StringTools.hex(_rgb)+", alpha:"+_alpha+")";
 	}
 
 	/**
@@ -415,7 +423,7 @@ class ASColor{
 	public function equals(o:Dynamic):Bool{
 		var c:ASColor = AsWingUtils.as(o,ASColor)	;
 		if(c != null){
-			return c.alpha == alpha && c.rgb == rgb;
+			return c._alpha == _alpha && c._rgb == _rgb;
 		}else{
 			return false;
 		}
